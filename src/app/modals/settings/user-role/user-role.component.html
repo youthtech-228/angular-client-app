@@ -1,0 +1,24 @@
+<div class="user-role-main">
+    <button *ngIf="userTabSelected" class="btn-user-role-add btn-submit">Add User</button>
+    <button *ngIf="!userTabSelected" class="btn-user-role-add btn-submit">Add Role</button>
+    <div class="tab-row">
+      <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+        <kendo-tabstrip-tab [selected]="true">
+          <ng-template kendoTabTitle>
+            <p class="user-role-tab-title">USERS</p>
+          </ng-template>
+          <ng-template kendoTabContent>
+            <app-user></app-user>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab>
+          <ng-template kendoTabTitle>
+            <p class="user-role-tab-title" [selected]="true">ROLES</p>
+          </ng-template>
+          <ng-template kendoTabContent>
+            <app-role></app-role>
+          </ng-template>
+        </kendo-tabstrip-tab>
+      </kendo-tabstrip>
+    </div>
+</div>

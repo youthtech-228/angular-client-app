@@ -1,0 +1,50 @@
+<form [formGroup]='companyRequirementsForm'>
+   <app-section title='DOT Requirements' [status]='getAuditStatus()'>
+      <div class='requirements-wrapper'>
+         <div class='row'>
+            <div class='col-md-7'>
+               <div class='text-lg text-color-primary'>
+                  If your company has employees that fall under any of the DOT modes
+                  below, then check all that apply:
+               </div>
+               <div class='requirements-check'>
+                  <app-auditable-checkbox label='Pipeline & Hazardous Materials Safety Admin. (PHMSA)' forName='phmsa'
+                                          [ncms_id]='company.ncms_id'
+                                          [auditAllForm]='auditAllForm'
+                                          field_id='company-information.requirements.phmsa'
+                                          message='Pipeline & Hazardous Materials Safety Admin Problem'
+                                          [inputForm]='companyRequirementsForm'></app-auditable-checkbox>
+                  <app-auditable-checkbox label='Federal Motor Carrier Safety Admin. (FMCSA)' forName='fmcsa'
+                                          [ncms_id]='company.ncms_id'
+                                          [auditAllForm]='auditAllForm'
+                                          field_id='company-information.requirements.fmcsa'
+                                          message='Federal Motor Carrier Safety Admin Problem'
+                                          [inputForm]='companyRequirementsForm'></app-auditable-checkbox>
+                  <app-auditable-checkbox label='Federal Aviation Admin. (FAA)' forName='faa'
+                                          [ncms_id]='company.ncms_id'
+                                          [auditAllForm]='auditAllForm'
+                                          field_id='company-information.requirements.faa'
+                                          message='Federal Aviation Admin. (FAA) Problem'
+                                          [inputForm]='companyRequirementsForm'></app-auditable-checkbox>
+                  <app-auditable-checkbox label='Federal Railroad Admin. (FRA)' forName='fra'
+                                          [ncms_id]='company.ncms_id'
+                                          [auditAllForm]='auditAllForm'
+                                          field_id='company-information.requirements.fra'
+                                          message='Federal Railroad Admin. (FRA) Problem'
+                                          [inputForm]='companyRequirementsForm'></app-auditable-checkbox>
+                  <app-auditable-checkbox label='United States Coast Guard (USCG)' forName='uscg'
+                                          [ncms_id]='company.ncms_id'
+                                          [auditAllForm]='auditAllForm'
+                                          field_id='company-information.requirements.uscg'
+                                          message='United States Coast Guard (USCG) Problem'
+                                          [inputForm]='companyRequirementsForm'></app-auditable-checkbox>
+               </div>
+            </div>
+            <div class='col-md-5'>
+               <app-message-panel [ncms_id]='company.ncms_id' [module]='module' [section]='section'
+                                  [auditAllForm]='auditAllForm'></app-message-panel>
+            </div>
+         </div>
+      </div>
+   </app-section>
+</form>

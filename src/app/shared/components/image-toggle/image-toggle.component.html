@@ -1,0 +1,8 @@
+<div class='content' (click)='toggleChecked()'>
+   <div class='content' *ngIf='isChecked'>
+      <img [src]='image'/>
+   </div>
+   <div class='content ms-auto' *ngIf='!isChecked'>
+      <img [src]='imageOff'/>
+   </div>
+</div>

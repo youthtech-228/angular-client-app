@@ -1,0 +1,72 @@
+<div class='home-wrapper'>
+   <div class='row'>
+      <div class='col-md-3 ps-0'>
+         <app-module-list [status]='status' [module]='module'></app-module-list>
+      </div>
+      <div class='col-md-9' style="overflow-x: hidden;">
+         <app-audit-questionnaire-header [instruction]="instructions" [title]="pageTitle" (toggleHelpPanel)="toggleHelpPanel()"></app-audit-questionnaire-header>
+         <ng-content></ng-content>
+         <app-section class='container-fluid' title='Additional Information (Optional)' *ngIf='allowAdditionalInformation'>
+            <div class='row'>
+               <div class="col-md-12 collapase-btn-wrapper">
+                  <button kendoButton [icon]="collapseBtnIcon" (click)="onCollapse()"></button>
+               </div>
+               <div class='col-md-7' *ngIf="bVisibleChild">                  
+                  <div class='mt-4'>
+                     <h6 class='card-title title-small-primary'>
+                        Upload Files
+                     </h6>
+                     <kendo-upload
+                           [saveUrl]='uploadSaveUrl'
+                           [removeUrl]='uploadRemoveUrl'
+                           (upload)="onFileUpload($event)"
+                           (complete)="completeEventHandler($event)">
+                     </kendo-upload>
+                  </div>
+                  <div class="mt-8"></div>
+                  <div class="mt-4">
+                     <div *ngFor="let file of uploadedFiles" class="file-archive-item">
+                        <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                        <div class="file-archive-item-content">
+                           <div class="file-archive-item-content-title">{{ file.name }}</div>
+                        </div>
+                        <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                           X
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class='col-md-5' *ngIf="bVisibleChild">
+                  <app-message-panel [ncms_id]='' [module]='"additionalInformation"'></app-message-panel>
+               </div>
+               <div *ngIf="alertMessage.show" class="col-md-12 alert alert-{{ alertMessage.class }} d-flex align-items-center" style="margin-top: 20px;" role="alert">
+                  <img *ngIf="alertMessage.class=='danger'" src="assets/img/home/alert-triangle-fill.svg" alt="" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2">
+                  <div *ngIf="alertMessage.class=='danger'">
+                     This audit page has uncompleted steps. You can save and move on to the next page, 
+                     but you will need to return to this page and successfully complete it before 
+                     it can be reviewed by NCMS.
+                  </div>
+                  <div *ngIf="alertMessage.class=='success'">
+                     You've filled out all the relevant parts of this audit page. Click save to move to the next step.
+                  </div>
+               </div>
+            </div>
+         </app-section>
+         <div class='line-lg'></div>
+         <div class='float-end mt-4' *ngIf='allowSave == true'>
+            <button class="btn btn-lg btn-submit" type='submit' [ngClass]="{ 'saving-bg' : isSaving }">
+               <img *ngIf='isSaving' src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+               Save
+            </button>
+         </div>
+         <!--Help Sidebar-->
+         <div class="sidebar" #sidebar [@slide] *ngIf="bSidebarVisible">
+            <div class="header">
+               <h3 class="title">Helpful Information</h3>
+               <img src='assets/img/home/close.svg' (click)="toggleHelpPanel()" class="img-close" alt='saving icon'/>
+            </div>
+            <div [innerHTML]="helpContent"></div>
+         </div>
+      </div>
+   </div>
+</div>

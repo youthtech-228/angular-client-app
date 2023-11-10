@@ -1,0 +1,29 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../variables";
+
+img {
+   vertical-align: unset;
+}
+
+//Provides spacing between the icons in the label.
+img:not(:last-child) {
+   margin-right: 4px;
+}
+
+.needs-attention {
+   background-color: $fail-bg;
+}
+
+.fail-img {
+   fill: $form-feedback-invalid-color
+}
+
+.input-label {
+   width: 100%;
+   cursor: pointer;
+   -webkit-user-select: none;  /* Chrome all / Safari all */
+   -moz-user-select: none;     /* Firefox all */
+   -ms-user-select: none;      /* IE 10+ */
+   user-select: none;
+}

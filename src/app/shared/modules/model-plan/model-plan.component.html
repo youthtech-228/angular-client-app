@@ -1,0 +1,270 @@
+<div>
+   <ng-template #errorTemplate>
+      {{errorMessage}}
+   </ng-template>
+   <div *ngIf='company && !isLoading' style='min-height: calc(100vh - 244px);'>
+      <form [formGroup]='modelPlanForm' (ngSubmit)='onSave()'>
+         <app-module-base #baseComponent [module]="module" [isSaving]='isSaving' [instructions]='instructions' [pageTitle]="'Model Plan'" [ncms_id]='company.ncms_id'>
+            <app-section [title]='"Pipeline Safety Plan"' showMessages='false' [status]='status'>
+               <div class='row'>
+                  <div class='col-md-6'>
+                     <app-company-form [company]='company' [companyAllForm]='modelPlanForm' [module]="module"></app-company-form>
+                     <form [formGroup]="pipeLineForm">
+                        <app-auditable-input 
+                           id='originalDate'
+                           [inputForm]='pipeLineForm' 
+                           [auditAllForm]='$any(modelPlanForm.get("auditForm"))' 
+                           [ncms_id]='company.ncms_id'
+                           [module]='module'
+                           section='company'
+                           field_name='originalDate'
+                           label='Original Date of Implementation'>
+                        </app-auditable-input>
+                        <app-auditable-input 
+                           id='effectiveDate'
+                           [inputForm]='pipeLineForm' 
+                           [auditAllForm]='$any(modelPlanForm.get("auditForm"))' 
+                           [ncms_id]='company.ncms_id'
+                           [module]='module'
+                           section='company'
+                           field_name='effectiveDate'
+                           label='New Effective Date'>
+                        </app-auditable-input>                
+                     </form>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel 
+                        [ncms_id]='company.ncms_id'
+                        [module]='module'
+                        [section]="'company'"
+                        [auditAllForm]='messageForm'>></app-message-panel>
+                  </div>
+               </div>
+            </app-section>
+            <app-section [title]='"Designated Personnel and Service Agents"' showMessages='false'>
+               <div class='row'>
+                  <div class='col-md-6'>
+                     <app-contact-phone-address 
+                        #consortiumElement 
+                        [parentForm]='modelPlanForm'
+                        [elementRef]="'consortiumElement'"
+                        title='Consortium/TPA (Third Party)'
+                        section="dpsa"
+                        [contact]='tpaContact'></app-contact-phone-address>
+                     <app-contact-phone-address
+                        #designatedElement 
+                        [parentForm]='modelPlanForm'
+                        [elementRef]="'designatedElement'"
+                        section="dpsa"
+                        title='Designated Employer Representative (DER) Alcohol & Drug Program Manager'
+                        [contact]='derContact'></app-contact-phone-address>
+                     <app-contact-phone-address 
+                        #mroElement 
+                        [elementRef]="'mroElement'"
+                        [parentForm]='modelPlanForm'
+                        section="dpsa"
+                        title='Medical Review Officer (MRO)'
+                        [contact]='mroContact'></app-contact-phone-address>
+                     <app-contact-phone-address
+                        #samhsaElement
+                        [elementRef]="'samhsaElement'"
+                        [parentForm]='modelPlanForm'
+                        section="dpsa"
+                        title='Substance Abuse & Mental Health Administration Laboratory (SAMHSA/HHS)'
+                        [contact]='hhsContact'></app-contact-phone-address>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel 
+                        [ncms_id]='company.ncms_id'
+                        [module]='module'
+                        [section]="'dpsa'"
+                        [auditAllForm]='messageForm'>></app-message-panel>
+                  </div>
+                  <div class='col-md-6'>
+                     <h5 class='text-color-primary'>Collection Sites</h5>
+                     <div class='text-lg text-color-primary pb-3'>
+                        Collection site procedures, processes, and personnel requirements will follow Part 40; Subpart C,
+                        Subpart D,
+                        Subpart E, Subpart J, Subpart K, Subpart L, Subpart M, and Subpart N. A list of collection site
+                        facilities,
+                        utilized by the company, will be available upon request
+                     </div>
+
+                     <h5 class='text-color-primary'>Alcohol Testing</h5>
+                     <div class='text-lg text-color-primary mb-4'>
+                        The company will utilize alcohol testing technicians who have received qualification training in
+                        accordance
+                        with the DOT Model BAT or STT course, as applicable. Technicians will conduct the testing using
+                        DOT-approved
+                        devices. These devices are approved by the National Highway Traffic Safety Administration. A list of
+                        breath
+                        testing devices, utilized by the company, will be available upon request.
+                     </div>
+                     <app-contact-phone-address 
+                        #sapElement
+                        [elementRef]="'sapElement'"
+                        [parentForm]='modelPlanForm'
+                        title='Substance Abuse Professional (SAP)'
+                        section="dpsa"
+                        [contact]='sapContact'></app-contact-phone-address>
+                     <app-contact-phone-address 
+                        #eapElement
+                        [elementRef]="'eapElement'"
+                        [parentForm]='modelPlanForm'
+                        title='Employee Assistance Program (EAP)'
+                        section="dpsa"
+                        [contact]='eapContact'></app-contact-phone-address>
+                  </div>
+               </div>
+            </app-section>
+            <app-section [title]='"Covered Positions"'>
+               <div class='row'>
+                  <div class='col col-md-6'>
+                     <div class='form-group'>
+                        <label>Job Functions</label>
+                        <div class='input-group mb-3'>
+                           <input 
+                              #jobTitleEmployee
+                              type='text'
+                              class='form-control'
+                              placeholder='Job Function/Title'
+                              aria-label='Job Function/Title'
+                              aria-describedby='button-addon2'>
+                           <div class='input-group-append'>
+                              <button
+                                 (click)="onAddCoveredPosition(jobTitleEmployee.value, 'Employee')"
+                                 class='btn btn-outline-secondary'
+                                 type='button'
+                                 id='button-addon2'>Add to List</button>
+                           </div>
+                        </div>
+                     </div>
+                     <div class='form-group'>
+                        <label>Supervisor Job Titles</label>
+                        <div class='input-group mb-3'>
+                           <input #jobTitleSupervisor placeholder='Job Function/Title' class='form-control'/>
+                           <div class='input-group-append'>
+                              <button
+                                 (click)="onAddCoveredPosition(jobTitleSupervisor.value, 'Supervisor')"
+                                 class='btn btn-outline-secondary'
+                                 type='button'
+                                 id='button-addon3'>Add to List</button>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <kendo-grid
+                           [kendoGridBinding]="gridView"
+                           kendoGridSelectBy="id"
+                           [pageSize]="5"
+                           [pageable]="true"
+                           [sortable]="true"
+                           [groupable]="false"
+                           [reorderable]="false"
+                           [resizable]="true"
+                           [height]="240"
+                           [columnMenu]="{ filter: true }"
+                           style="max-width: 1614px"
+                        >
+                           <kendo-grid-column field="title" title="Title" [width]="120">
+                              <ng-template kendoGridCellTemplate let-dataItem>
+                                 <div class="title">{{ dataItem.job_title }}</div>
+                              </ng-template>
+                           </kendo-grid-column>
+                           <kendo-grid-column field="employee_supervisor" title="Employee/Supervisor" [width]="120">
+                              <ng-template kendoGridCellTemplate let-dataItem>
+                                 <div class="employee_supervisor">{{ dataItem.job_type }}</div>
+                              </ng-template>
+                           </kendo-grid-column>
+                        </kendo-grid>
+                     </div>
+                     <div class='mt-4'>
+                        <h6 class='card-title title-small-primary'>
+                           Upload Files
+                        </h6>
+                        <kendo-upload
+                              [saveUrl]='uploadSaveUrl'
+                              [removeUrl]='uploadRemoveUrl'
+                              (upload)="onFileUpload($event,fileTypeCPos)"
+                              (complete)="completeEventHandler()">
+                        </kendo-upload>
+                     </div>
+                     <div class="mt-4">
+                        <div *ngFor="let file of uploadedFilesCPos" class="file-archive-item">
+                           <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                           <div class="file-archive-item-content">
+                              <div class="file-archive-item-content-title">{{ file.name }}</div>
+                           </div>
+                           <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel 
+                     [ncms_id]='ncms_id'
+                     [module]='module'
+                     [section]="'JobFunctions'"
+                     [auditAllForm]='messageForm'>></app-message-panel>
+                  </div>
+               </div>
+            </app-section>
+            <app-section title='Create Policy'>
+               <div class='row'>
+                  <div class='col-md-6'>
+                     <div class='text-lg text-color-primary'>
+                        In order to create your policy you must first agree to the <a>Contractor Copyright License
+                        Agreement.</a>
+                     </div>
+                     <div class='form-check mt-4'>
+                        <input class='form-check-input' type='checkbox' value='' id='defaultCheck1'>
+                        <label class='form-check-label text-lg text-color-primary' for='defaultCheck1'>
+                           I agree to the Contractor Copyright License Agreement
+                        </label>
+                     </div>
+                     <div class='mt-4'>
+                        <h6 class='card-title title-small-primary'>
+                           Upload Files
+                        </h6>
+                        <kendo-upload
+                              [saveUrl]='uploadSaveUrl'
+                              [removeUrl]='uploadRemoveUrl'
+                              (upload)="onFileUpload($event,fileTypeCPol)"
+                              (complete)="onCpolUplodComplete()">
+                        </kendo-upload>
+                     </div>
+                     <div class="mt-4">
+                        <div *ngFor="let file of uploadedFilesCPol" class="file-archive-item">
+                           <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                           <div class="file-archive-item-content">
+                              <div class="file-archive-item-content-title">{{ file.name }}</div>
+                           </div>
+                           <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel 
+                     [ncms_id]='ncms_id'
+                     [module]='module'
+                     [section]="'CreatePolicy'"
+                     [auditAllForm]='messageForm'>></app-message-panel>
+                  </div>
+               </div>
+            </app-section>
+         </app-module-base>
+      </form>
+   </div>
+   <div *ngIf='(!company || isLoading) && ncms_id !== "0"' style='height: calc(100vh - 244px);'>
+      <img 
+         style='text-align: center;
+               top: 300px;
+               position: absolute;
+               left: calc(50% - 50px);
+               height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

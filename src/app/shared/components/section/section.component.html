@@ -1,0 +1,16 @@
+<div>
+   <app-pass-control [status]='status'></app-pass-control>
+   <div [ngClass]="{ 'pending' : status === eAuditStatus.PENDING_REVIEW}" class='container pt-5 pb-6'>
+      <div class='section-title'>
+         <div class='title'>
+            <h5 class='card-title title-primary'>
+               {{title}}
+               <img class='ms-1' src='assets/img/home/clock-fill.svg' *ngIf='status === eAuditStatus.PENDING_REVIEW'/>
+               <img class='ms-1' src='assets/img/home/alert-triangle-fill-small.svg'
+                    *ngIf='status === eAuditStatus.NEEDS_ATTENTION'/>
+            </h5>
+         </div>
+      </div>
+      <ng-content></ng-content>
+   </div>
+</div>

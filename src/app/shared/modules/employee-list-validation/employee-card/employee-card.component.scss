@@ -1,0 +1,44 @@
+.card {
+   width: 363px;
+   //height: 346px;
+   margin: auto;
+   height: 100%;
+   padding: 23px 31.5px 26px 19px;
+   border-radius: 18px;
+   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.16);
+   background-color: #ffffff;
+}
+
+.ellipse {
+   width: 132px;
+   height: 133px;
+   margin: 0 auto;
+   padding: 21.7px 13.8px 0 12.5px;
+   border: solid 3px #dddddd;
+   position: relative;
+   overflow: hidden;
+   border-radius: 50%;
+}
+
+.employee-img {
+      display: inline;
+      margin: 0 auto;
+      height: 100%;
+      width: auto;
+}
+
+.employee-section {
+   margin: 13px auto 0;
+   font-family: HelveticaNeue;
+   font-size: 25px;
+   font-weight: bold;
+   text-align: left;
+   color: var(--ncms-color-primary-red-dark);
+}
+
+.dot {
+      width: 14px;
+      height: 14px;
+      margin: 0 7px 0 0;
+      border-radius: 7px;
+}

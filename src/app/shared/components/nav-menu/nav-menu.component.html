@@ -1,0 +1,64 @@
+<div class='menu-style'>
+   <div class="header-page-authStatus">
+      <a class="card-link" routerLink="/" routerLinkActive="active-button">Home</a>
+      <a class="card-link" (click)='logout()'>Log Out</a>
+      <a class="card-link" routerLink="/action-center" routerLinkActive="active-button">Action Center</a>
+      <a class="card-link" routerLink="/company-information" routerLinkActive="active-button">Company Information</a>
+      <a class="card-link" routerLink="/settings" routerLinkActive="active-button">Settings</a>
+
+      <!--      <span *ngIf="auth.loggingIn">Logging in...</span>-->
+<!--      <ng-template [ngIf]="!auth.loggingIn">-->
+<!--         <a *ngIf="!auth.loggedIn" (click)="auth.login()">Log In</a>-->
+<!--         <span *ngIf="auth.loggedIn && auth.userProfile">-->
+<!--          {{ auth.userProfile.name }}-->
+<!--            <span class="divider">|</span>-->
+<!--          <a (click)="auth.logout()">Log Out</a>-->
+<!--        </span>-->
+<!--      </ng-template>-->
+   </div>
+</div>
+<!-- <header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+  >
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">NCMSAudit</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/counter']"
+              >Counter</a
+            >
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
+              >Fetch data</a
+            >
+          </li>
+        </ul>
+        <app-login-menu></app-login-menu>
+      </div>
+    </div>
+  </nav>
+</header> -->

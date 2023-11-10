@@ -1,0 +1,18 @@
+.tooltip-inner {
+   text-align: left;
+}
+
+::ng-deep .info-style * {
+   font-size: 1em;
+}
+
+::ng-deep .error-style * {
+   font-size: 1em;
+   color: white;
+   background: var(--ncms-color-primary-red-bright);
+}
+
+::ng-deep .error-style .k-callout {
+   background-color: transparent;
+   color: var(--ncms-color-primary-red-bright);
+}

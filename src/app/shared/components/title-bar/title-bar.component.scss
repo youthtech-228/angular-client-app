@@ -1,0 +1,23 @@
+.title-bar-comp {
+   height: 73px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.title-bar-title {
+   font-size: 36px;
+   font-weight: normal;
+   line-height: 1.19;
+   color: #ffffff;
+}
+
+.icon-dot {
+   width: 24px;
+   height: 24px;
+   color: white;
+}
+
+img {
+   fill: white;
+}

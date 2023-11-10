@@ -1,0 +1,139 @@
+<div>
+   <div *ngIf='!isPageLoading' class="main row">
+      <ng-sidebar-container>
+         <!-- A sidebar -->
+         <ng-sidebar 
+            [(opened)]="toggleSidebar"
+            [position]="'right'"
+            [mode]="'push'"
+            [dockedSize]="'50px'"
+            sidebarClass='sidebar'
+            [closeOnClickOutside]="sidebarMode"
+         >
+            <hr style="margin:0px">
+            <div class="sidebar-main">
+               <div class="user-row sidebar-item">
+                  <div>
+                     <p class="user-label">USER</p>
+                     <p class="user-name">Brandon Shuey</p>
+                  </div>
+                  <img class="icon-trash btn-img" src="assets/img/home/trash-fill-red.svg" alt="">
+               </div>
+               <hr>
+               <div class="sidebar-item">
+                  <p class="role-label">BRANDON’S CURRENT ROLES</p>
+               </div>
+               <div class="myroles-row sidebar-item">
+                  <kendo-chip-list
+                  >
+                     <div *ngFor="let chip of myRoles">
+                        <kendo-chip
+                           class="chip-style"
+                           [label]="chip.RoleName"
+                           [removable]="true"
+                           (remove)="onMyRoleRemove($event)"
+                        >
+                        </kendo-chip>
+                     </div>
+                  </kendo-chip-list>
+               </div>
+               <p class="roles-label sidebar-item">
+                  AVAILABLE ROLES
+               </p>
+               <div class="sidebar-item role-filter-row">
+                  <kendo-textbox
+                     placeholder="Search all roles"
+                     [(ngModel)]="roleFilter"
+                     (change)="onFilterRole()"
+                     (keyup)="onFilterRole()"
+                     (keydown)="onFilterRole()">
+                  </kendo-textbox>
+               </div>
+               <div *ngFor="let role of filteredRoles">
+                  <div class="role-row sidebar-item">
+                     <div class="role-details">
+                        <div class="role-name">{{ role.RoleName }}</div>
+                        <div class="role-detail">{{ role.Description }}</div>
+                     </div>
+                     <kendo-switch
+                        [(ngModel)]="role.checked"
+                        (valueChange)="onRoleToggle($event, role)"
+                     ></kendo-switch>
+                  </div>
+                  <hr>
+               </div>
+            </div>
+         </ng-sidebar>
+         <div ng-sidebar-content>
+            <kendo-grid
+               [kendoGridBinding]="gridData"
+               kendoGridSelectBy="user_id"
+               [selectedKeys]="selectedUsers"
+               [pageSize]="20"
+               [pageable]="true"
+               [sortable]="true"
+               [groupable]="false"
+               [reorderable]="true"
+               [resizable]="true"
+               [columnMenu]="{ filter: true }"
+            >
+               <ng-template kendoGridToolbarTemplate>
+               <input
+                  placeholder="Search in all columns..."
+                  kendoTextBox
+                  (input)="onFilter($event.target.value)"
+               />
+               </ng-template>
+               <kendo-grid-column
+                  field="username"
+                  title="name"
+                  [headerStyle]="{
+                     'font-size': '20px',
+                     'font-weight': 'normal',
+                     'font-stretch': 'normal',
+                     'font-style': 'normal',
+                     'line-height': '1.2',
+                     'letter-spacing': 'normal',
+                     'text-align': 'left',
+                     'color': '#312424'
+                  }"
+                  [style]="{
+                     'font-size': '20px',
+                     'font-weight': 'normal',
+                     'font-stretch': 'normal',
+                     'font-style': 'normal',
+                     'line-height': '1.2',
+                     'letter-spacing': 'normal',
+                     'text-align': 'left',
+                     'color': '#312424'
+                  }"
+               >
+               </kendo-grid-column>
+               <kendo-grid-column
+                  field="idx"
+                  title=""
+                  [width]="200"
+                  [resizable]="false"
+                  filter="boolean"
+               >
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                     <button kendoButton look="flat" [primary]="true" (click)="onUserEdit(dataItem.idx)">
+                        Manage
+                     </button>
+                  </ng-template>
+               </kendo-grid-column>
+            </kendo-grid>
+         </div>
+      </ng-sidebar-container>
+      
+   </div>
+   <div *ngIf='isPageLoading' style='height: calc(100vh - 244px);'>
+      <img 
+         style='text-align: center;
+               top: 300px;
+               position: absolute;
+               left: calc(50% - 50px);
+               height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

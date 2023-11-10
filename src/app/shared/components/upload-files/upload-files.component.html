@@ -1,0 +1,28 @@
+<div>
+   <h6 class='card-title title-small-primary'>
+      Upload Files
+   </h6>
+   <kendo-upload #kendoUpload
+                 [saveUrl]='uploadSaveUrl'
+                 [removeUrl]='uploadRemoveUrl'
+                 [ngModel]='uploadedFiles'
+                 [autoUpload]="false"
+                 removeMethod='delete'
+                 (upload)="onFileUpload($event)"
+                 (remove)="onFileRemove($event)"
+                 (clear)="onFileClear()"
+                 (success)="successEventHandler($event)"
+   >
+   </kendo-upload>
+<!--                 (upload)='onFileUpload($event)'-->
+<!--                 (complete)='completeEventHandler()'>-->
+<!--      <ng-template kendoUploadFileInfoTemplate let-files>-->
+<!--         <div class='d-flex flex-row' >-->
+<!--            <div>Name: {{ files[0].name }}</div>-->
+<!--            <img height='40'-->
+<!--                 [src]='files[0].src'-->
+<!--                 style='margin: 5px; border: 1px solid gray;'/>-->
+<!--         </div>-->
+<!--      </ng-template>-->
+<!--   </kendo-upload>-->
+</div>

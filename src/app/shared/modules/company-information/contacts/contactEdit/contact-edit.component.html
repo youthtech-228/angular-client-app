@@ -1,0 +1,51 @@
+<div class='frame-style'>
+   <div class='d-flex mb-2 w-100' role='button' (click)='onClose()'>
+      <div>
+         <h5 class='title-medium-primary row g-0 align-items-center'>
+            <div class='person-background'>
+               <img class='person-fill' src='assets/img/home/person-fill%20(3).svg' alt=''/>
+            </div>
+            Edit Contact
+         </h5>
+      </div>
+      <img src="assets/img/home/condense.svg"  style='width: 24px; margin-left: auto' alt=''/>
+   </div>
+   <form autocomplete='off' [formGroup]='contactForm'>
+      <div class='form-group' [ngClass]="{ 'has-error' : !contactForm.controls.name.valid }">
+         <input type='hidden' name='id' formControlName='id'>
+         <input type='hidden' name='ncms_id' formControlName='ncms_id'>
+
+         <app-auditable-input id='name'
+                              [inputForm]='contactForm' [auditAllForm]='auditAllForm' [ncms_id]='ncms_id'
+                              [module]='module' [section]='section' field_name='name' [record_id]='contact.id'
+                              label='Contact Name'>
+         </app-auditable-input>
+
+      </div>
+      <div class='form-group' [ngClass]="{ 'has-error' : !contactForm.controls.email.valid }">
+         <app-auditable-input id='email'
+                              [inputForm]='contactForm' [auditAllForm]='auditAllForm' [ncms_id]='ncms_id'
+                              [module]='module' [section]='section' field_name='email' [record_id]='contact.id'
+                              label='Contact Email' >
+         </app-auditable-input>
+      </div>
+      <div class='form-group' [ngClass]="{ 'has-error' : !contactForm.controls.email.valid }">
+
+         <app-auditable-input id='phone'
+                              [inputForm]='contactForm' [auditAllForm]='auditAllForm' [ncms_id]='ncms_id'
+                              [module]='module' [section]='section' field_name='phone' [record_id]='contact.id'
+                              label='Contact Phone' isPhone='true'>
+         </app-auditable-input>
+      </div>
+      <div class='d-flex align-items-center row justify-content-between g-0 mt-5'>
+         <div class='form-check mb-2'>
+            <input id='primary contact' class='form-check-input' formControlName='primary' type='checkbox'/>
+            <label class='form-check-label form-label' for='primary contact'>Primary Contact</label>
+         </div>
+<!--         <div>-->
+<!--            <button type='button' class='btn btn-cancel me-3' (click)='onClose()' >Cancel</button>-->
+<!--            <button type='button' class='btn btn-submit'>{{isNew ? 'Add' : 'Update'}}</button>-->
+<!--         </div>-->
+      </div>
+   </form>
+</div>

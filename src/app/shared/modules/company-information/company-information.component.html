@@ -1,0 +1,72 @@
+<div>
+   <ng-template #template>
+      Your data has been saved. Time for tea!
+   </ng-template>
+   <ng-template #errorTemplate>
+      {{errorMessage}}
+   </ng-template>
+   <ng-template #saveTemplate>
+      <span class='text-sm me-3'>Your data has changed.</span>
+      <button class='btn btn-outline-white btn-sm' type='button' [ngClass]="{ 'saving-bg' : isSaving }"
+              (click)='save()'>
+         <img *ngIf='isSaving' src='assets/img/home/ios-spinner.min.svg' width='16px' height='16px' alt='saving icon'/>
+         Save
+      </button>
+   </ng-template>
+   <ng-template #sendTemplate>
+      <span class='text-sm me-3'>Your data has not been sent to the contractor.</span>
+      <button class='btn btn-outline-white btn-sm' (click)='send()'>
+         Send
+      </button>
+   </ng-template>
+   <div *ngIf='company && !isLoading' style='min-height: calc(100vh - 244px);'>
+      <form [formGroup]='companyAllForm' (ngSubmit)='save()'>
+         <app-module-base instructions='Please complete the information below.' [pageTitle]="'Company Information'" [ncms_id]='company.ncms_id' [isSaving]='isSaving' [status]='status'
+                          [module]='module'>
+            <app-section [title]='"Company"' [status]='status'>
+               <div class='row'>
+                  <div class='col-md-7'>
+                     <div class='row'>
+                        <div class='col-md-6'>
+                           <app-company-form [company]='company' [companyAllForm]='companyAllForm' [module]='module'></app-company-form>
+                        </div>
+                        <div class='col-md-6'>
+                           <app-company-extra-form [company]='company' [companyAllForm]='companyAllForm' [module]='module'>
+                           </app-company-extra-form>
+                        </div>
+                     </div>
+                  </div>
+                  <div class='col-md-5'>
+                     <app-message-panel [ncms_id]='company.ncms_id' [module]='module' section='company'
+                                        [auditAllForm]='$any(companyAllForm.get("auditForm"))'></app-message-panel>
+                  </div>
+               </div>
+            </app-section>
+            <app-contacts #contactsElement [status]='eAuditStatus.PENDING_REVIEW' [ncms_id]='company.ncms_id'
+                          [module]='module' [allForms]='companyAllForm'></app-contacts>
+            <!--            <app-requirements #requirementsElement [company]='company' [module]='module' [companyAllForm]='companyAllForm'></app-requirements>-->
+            <app-third-party #thirdPartyElement [company]='company' [module]='module'
+                             [companyAllForm]='companyAllForm'></app-third-party>
+            <app-pass-control></app-pass-control>
+            <div class='d-flex flex-row'>
+               <div class='col-5 ms-4 mb-2 mt-6 me-2'>
+                  <app-internal-comments #internalCommentsElement *ngIf='isAuditor()' [companyAllForm]='companyAllForm'
+                                         [module]='module'></app-internal-comments>
+               </div>
+               <div class='col-7 ms-3 mb-2 me-5 mt-6'>
+                  <app-upload-files [fetchType]='module'></app-upload-files>
+               </div>
+            </div>
+         </app-module-base>
+      </form>
+   </div>
+
+   <div *ngIf='ncms_id === "0"' style='height: calc(100vh - 244px);'>
+      <div>Set the NCMS ID</div>
+      <a class='card-link' routerLink='/general-settings' routerLinkActive='active-button'>General Settings</a>
+   </div>
+   <div *ngIf='(!company || isLoading) && !error && ncms_id !== "0"' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+           src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

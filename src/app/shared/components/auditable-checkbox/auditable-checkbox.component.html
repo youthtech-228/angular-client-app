@@ -1,0 +1,21 @@
+<div class='auditable-checkbox mb-2'>
+   <div [formGroup]='inputForm' class='box d-flex flex-row align-items-center'>
+      <input [id]='forName' type='checkbox' [formControlName]='field_name'/>
+      <div [formGroup]='auditForm'>
+         <!--  Hidden fields for all fields in the AuditMessage. Easy way to include all fields on save.    -->
+         <input type='hidden' name='id' formControlName='id'>
+         <input type='hidden' name='field_name' formControlName='field_name'>
+         <input type='hidden' name='field_id' formControlName='field_id'>
+         <input type='hidden' name='module' formControlName='module'>
+         <input type='hidden' name='ncms_id' formControlName='ncms_id'>
+         <input type='hidden' name='created_by' formControlName='created_by'>
+         <input type='hidden' name='created_date' formControlName='created_date'>
+         <input type='hidden' name='message_text' formControlName='message_text'>
+         <input type='hidden' name='notification_status' formControlName='notification_status'>
+         <input type='hidden' name='comments' formControlName='comments'>
+         <app-audit-label [label]='label' formControlName='status' [forName]='forName' (statusChange)='selectAuditMessage($event)'>
+            <ng-content></ng-content>
+         </app-audit-label>
+      </div>
+   </div>
+</div>

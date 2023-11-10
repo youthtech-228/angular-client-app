@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/core.scss";
+@import "./assets/scss/_palette.scss";
+
+a {
+  font-size: 13px;
+  color: #0173e6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.pointable {
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0173e6;
+  border-color: #0173e6;
+}

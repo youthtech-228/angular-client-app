@@ -1,0 +1,53 @@
+<div>
+   <div *ngIf='!isLoading'>
+      <form [formGroup]='pageForm' (ngSubmit)='save()'>
+         <app-module-base 
+            [alertMessage]="alertMessage" 
+            [instructions]='instructions' 
+            [pageTitle]="'Medical Review'"
+            [module]='module'
+            [isSaving]='isSaving'>
+            <app-section [title]='"MRO’s current certification"'>
+               <div class='row'>
+                  <div class='col-md-6'>
+                     <div class='mt-4'>
+                        <h6 class='card-title title-small-primary'>
+                           Upload Files
+                        </h6>
+                        <kendo-upload
+                           [saveUrl]='uploadSaveUrl'
+                           [removeUrl]='uploadRemoveUrl'
+                           [ngModel]='uploadedFiles'
+                           [autoUpload]="true"
+                           removeMethod='delete'
+                           (upload)="onFileUpload($event)"
+                           (remove)="onFileRemove($event)"
+                           (complete)="completeEventHandler($event)"
+                           (clear)="onFileClear()"
+                           (success)="successEventHandler($event)"
+                           [ngModelOptions]="{standalone: true}">
+                        </kendo-upload>
+                     </div>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel
+                        [ncms_id]='ncms_id'
+                        [module]='module'
+                        section='general'
+                        [auditAllForm]='messageForm'>
+                     </app-message-panel>
+                  </div>
+               </div>
+            </app-section>
+         </app-module-base>
+      </form>
+   </div>
+   <div *ngIf='ncms_id === "0"' style='height: calc(100vh - 244px);'>
+      <div>Set the NCMS ID</div>
+      <a class='card-link' routerLink='/general-settings' routerLinkActive='active-button'>General Settings</a>
+   </div>
+   <div *ngIf='isLoading' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

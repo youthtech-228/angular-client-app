@@ -1,0 +1,53 @@
+<div class='frame-style d-flex align-items-center'>
+  <app-modal elementId='confirmDelete{{contact.id}}' title='Delete Contact?' submitLabel='Delete {{getContact().name}}'
+             (submit)='handleDeleteContact()'>
+    Do you want to permanently delete, {{getContact().name}}?
+  </app-modal>
+  <div class='col-sm-12 col-md-4'>
+    <div class='person-background'>
+      <img class='person-fill' src='assets/img/home/person-fill%20(3).svg' alt=''/>
+    </div>
+  </div>
+  <div class='col-xs-12 col-sm-8'>
+    <div class='' *ngIf='getContact().primary'>
+      <img class='reward' src='assets/img/home/award-small.svg' alt=''/>
+      <div class='reward-title'>PRIMARY</div>
+    </div>
+    <div class='d-flex mb-2' (click)='handleEditContact()'>
+      <div class='d-flex align-items-center'>
+        <div class='title flex-grow-0 flex-shrink-0'>
+          {{getContact().name}}
+        </div>
+        <div class='flex-grow-0 flex-shrink-0'>
+          <img class='ms-2 me-2' [src]='statusIcon' alt='' style="width: 1.2em"/>
+        </div>
+        <div class='flex-grow-0 flex-shrink-0'>
+          <img src='assets/img/home/expand.svg' style='width: 24px; cursor: pointer' alt=''/>
+        </div>
+      </div>
+    </div>
+    <div class=''>
+      <a class='btn btn-lg btn-submit me-2' [href]='"tel:" + getContact().phone'
+         [title]='"Call" +  (getContact().phone | phoneNumber)' *ngIf='getContact().phone'>Call</a>
+      <!--         <a >Call {{contact.phone | phoneNumber}}</a>-->
+      <a class='btn btn-lg btn-secondary me-2' [href]='"email:" + getContact().email'
+         [title]='"Email" +  getContact().email'
+         *ngIf='getContact().email'>Email</a>
+
+      <div class='me-3 d-inline-block'>
+        <div class='btn btn-icon-normal' data-bs-toggle='dropdown'>
+          <img class='icon-dot' src='assets/img/home/three-dots-horizontal.png' alt='horizontal dots'/>
+        </div>
+        <div class='dropdown-menu' aria-labelledby='dropdownMenu2'>
+          <button class='dropdown-item' type='button' (click)='handleEditContact()'>
+            Edit
+          </button>
+          <button class='dropdown-item' type='button' data-bs-toggle='modal'
+                  [attr.data-bs-target]='"#confirmDelete"+contact.id'>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

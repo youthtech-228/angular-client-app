@@ -1,0 +1,139 @@
+<div>
+   <form [formGroup]="pageForm" (ngSubmit)='onSave()'>
+      <app-module-base 
+         #baseComponent 
+         *ngIf='!isLoading' 
+         [module]='module'
+         [alertMessage]="alertMessage" 
+         [instructions]='instructions' 
+         [pageTitle]="'Return to Duty'"
+         [isSaving]='isSaving'>
+         <app-section [title]='"Return to Duty"'>
+            <div class='row'>
+               <div class='col-md-6'>
+                  <div *ngIf="!isComplete" 
+                     class="col-md-12"
+                  >
+                     <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <img src="assets/img/home/alert-triangle-fill.svg" alt="" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2">
+                        <div>
+                           Please indicate if your company provides a SAP and Return-to-duty process.
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     Do you offer employees the opportunity to return to a 
+                     DOT safety-sensitive job function, 
+                     after a DOT drug and alcohol violation, 
+                     if they have completed the required return to duty process?
+                  </div>
+                  <div class='col-md-12'>
+                     <div class="form-check form-check-inline">
+                        <input class="form-check-input" 
+                           type="radio"
+                           id="isDotSafeYes"
+                           value="1"
+                           formControlName="isDotSafe"
+                        >
+                        <label class="form-check-label" for="isDotSafeYes">
+                        Yes
+                        </label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <input
+                           class="form-check-input"
+                           type="radio"
+                           id="isDotSafeNo"
+                           value="0"
+                           formControlName="isDotSafe" >
+                        <label class="form-check-label" for="isDotSafeNo">
+                           No
+                        </label>
+                     </div>
+                  </div>
+                  <div class="col-md-12 mt-4">
+                     Does your company provide a SAP referral list 
+                     to employees (including an applicant or new employee)
+                     who violates a DOT drug and alcohol regulation?
+                  </div>
+                  <div class='col-md-12'>
+                     <div class="form-check form-check-inline">
+                        <input class="form-check-input"
+                           type="radio" 
+                           id="isSapSafeYes" 
+                           value="1"
+                           formControlName="isSapSafe">
+                        <label class="form-check-label" for="isSapSafeYes">
+                        Yes
+                        </label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <input 
+                           class="form-check-input"
+                           type="radio"
+                           id="isSapSafeNo"
+                           value="0"
+                           formControlName="isSapSafe" >
+                        <label class="form-check-label" for="isSapSafeNo">
+                        No
+                        </label>
+                     </div>
+                  </div>
+                  <div class="col-md-12 mt-3" *ngIf="sapExplantionVisible">
+                     Explain how you are meeting the DOT Rule, 49 CFR part 40 Section 40.287, 
+                     in regards to providing a list of SAP’s? 
+                  </div>
+                  <div class="col-md-12" *ngIf="sapExplantionVisible">
+                     <textarea class="form-control" formControlName="sapRtdExplanation" rows="3"></textarea>
+                  </div>
+                  <div *ngIf="sapAgreeVisible" class="col-md-12 form-check mt-4">
+                     <input
+                        class="form-check-input"
+                        type="checkbox"
+                        formControlName="sapRtdAgree"
+                        id="sapRtdAgree">
+                     <label class="form-check-label" for="sapRtdAgree">
+                        I acknowledge that our company follows a SAP and Return-To-Duty process listed below after a DOT drug and alcohol regulation violation.
+                     </label>
+                  </div>
+                  <div *ngIf="sapAgreeVisible" class="col-md-12 mt-4">
+                     <ul>
+                        <li>
+                           Validate the SAP’s credentials to ensure they satisfy the entire requirements of 49 CFR Part 40.281.
+                        </li>
+                        <li>
+                           A recommended course of education and/or treatment with which the employee must demonstrate successful compliance prior to returning to DOT safety-sensitive duty.
+                        </li>
+                        <li>
+                           A written report which is provided directly to your company DER highlighting the specific recommendations for assistance. (The SAP’S written report must be submitted directly from the SAP to your company DER with no third party involvement).
+                        </li>
+                        <li>
+                           A process for the SAP to re-evaluate the employee to determine if they successfully carried out the education and/or treatment recommendations. The SAP should provide a written report directly to the DER highlighting the clinical determination that the employee has demonstrated successful compliance with the SAP’s initial evaluation recommendation.
+                        </li>
+                        <li>
+                           Ensure the SAP provides a written follow-up testing plan directly to the DER. The scheduled plan should be directing that the employee be subject, at a minimum, to six unannounced tests within the first 12 months following the employee’s return to safety-sensitive functions.
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class='col-md-6'>
+                  <app-message-panel
+                  [ncms_id]='ncms_id'
+                  [module]='module'
+                  section='general'
+                  [auditAllForm]='messageForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+      </app-module-base>
+   </form>
+   <div *ngIf='ncms_id === "0"' style='height: calc(100vh - 244px);'>
+      <div>Set the NCMS ID</div>
+      <a class='card-link' routerLink='/general-settings' routerLinkActive='active-button'>General Settings</a>
+   </div>
+   <div *ngIf='isLoading' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>
+

@@ -1,0 +1,14 @@
+<div class='pass-wrapper' [ngClass]='{"no-status": status === undefined}'>
+   <div class='pass-line'>
+      <div
+            [ngClass]='{
+            "needs-attention": status == eAuditStatus.NEEDS_ATTENTION,
+            passed: status === eAuditStatus.PASSED,
+            "pending-review": status === eAuditStatus.PENDING_REVIEW,
+            "no-status": status === undefined
+            }'
+      >
+         {{getText()}}
+      </div>
+   </div>
+</div>

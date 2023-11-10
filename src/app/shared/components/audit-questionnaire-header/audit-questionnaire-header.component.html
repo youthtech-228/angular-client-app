@@ -1,0 +1,21 @@
+<div class="ncms-wrapper">
+  <div class="ncms-box">
+    <div class="ncms-title">
+      {{ title }}
+    </div>
+    <div class="mr-2">
+       <button type='button' class='btn btn-icon' (click)="toggleHelpPanel.emit()" >
+          <img class='icon-dot' id='img-question-mark' src='assets/img/home/question-fill.svg' alt='help'/>
+       </button>
+    </div>
+  </div>
+</div>
+<div class="pb-4 instruction-wrapper" *ngIf="instruction.length > 0">
+  <div class="instruction-title">Instructions</div>
+  <div class=" instruction-note">
+<!--     <app-read-more>-->
+        <div [innerHTML]='instruction'></div>
+<!--     </app-read-more>-->
+  </div>
+</div>
+

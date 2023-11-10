@@ -1,0 +1,83 @@
+<form class='comment-content' [formGroup]='auditForm'>
+  <div class='d-flex flex-column message-content'>
+    <div class='d-flex flex-row'>
+      <div class='w-100'>
+        <div class='content-title' [ngClass]='{"inactive": isMessageInactive()}'>
+          <div class='title'>{{getValue().field_name}}</div>
+        </div>
+        <div class='content-text justify-content-between'>
+          <div class='label-normal w-100'>
+            <div [hidden]='!isEditing '>
+                     <textarea id='new comment' #messageInput name='Comment' rows='3' class='w-100'
+                               (focus)='hasFocus = true'
+                               (blur)='handleEndEditing()'
+                               formControlName='message_text'>
+                     </textarea>
+            </div>
+            <div *ngIf='!isEditing' class='label-normal w-100 d-flex flex-row align-items-center'
+                 [ngClass]='{"inactive": isMessageInactive()}'>
+              <div class='me-2' (dblclick)='handleStartEditing(true)'>
+                {{getValue().message_text}}
+              </div>
+              <div *ngIf='isAuditor()'>
+                <div class='btn btn-icon-sm' data-bs-toggle='dropdown'>
+                  <img style='margin:auto 0 4px 0' width='4' src='assets/img/home/three-dots-vertical (2).svg'
+                       alt='vertical dots menu'/>
+                </div>
+                <div class='dropdown-menu' aria-labelledby='dropdownMenu3'>
+                   <button class='dropdown-item' type='button'
+                           (click)='handleStartEditing(true)'>
+                      Edit
+                   </button>
+                  <div class='message-content' *ngFor='let messageTemplate of messageTemplates'>
+                    <button class='dropdown-item' type='button'
+                            (click)='handleChangeTemplate(messageTemplate)'>
+                      {{messageTemplate.name}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='content-comment'>
+              <img src='assets/img/home/logo_token.svg' alt='person icon' *ngIf='isUserNcms()'/>
+              <img src='assets/img/home/person-fill-small.svg' alt='person icon'
+                   *ngIf='!isUserNcms() && getValue().status === eAuditStatus.NEEDS_ATTENTION'/>
+              <img src='assets/img/home/person-fill-small-gray.svg' alt='person icon'
+                   *ngIf='!isUserNcms() && getValue().status !== eAuditStatus.NEEDS_ATTENTION'/>
+              <span class='label-small' style='font-weight: bold'
+                    [ngClass]='{"inactive": !isUserNcms() && isMessageInactive, "ncms-user": isUserNcms()}'>
+               {{getValue().created_by}}
+            </span>
+              <span *ngIf='getValue().created_date'
+                    [ngClass]='{"inactive": isMessageInactive()}'
+                    class='label-small text-muted ms-1'>
+               {{getValue().created_date | dateDotNet | date : 'M/d/yyyy, h:mm a'}}
+            </span>
+            </div>
+            <a *ngIf='auditForm' class='card-link pointable' (click)='handleAddNewComment()'>Reply</a>
+          </div>
+        </div>
+      </div>
+      <div class='d-flex flex-column flex-grow-1 flex-shrink-1 justify-content-between align-items-center'>
+        <!-- The status buttons -->
+        <img class='icon pointable' src='assets/img/home/star-fill-color.svg' alt='star icon'
+             *ngIf='getValue().status === eAuditStatus.PASSED'/>
+        <img class='icon pointable' src='assets/img/home/star-fill.svg' alt='star icon'
+             (click)='handlePassClick()' *ngIf='auditForm && getValue().status !== eAuditStatus.PASSED'/>
+        <img class='icon pointable' src='assets/img/home/clock-fill.svg' alt='clock icon'
+             (click)='handlePendingClick()' *ngIf='isShowMessagePending() && auditForm && getValue().status === eAuditStatus.PENDING_REVIEW'/>
+        <img class='icon pointable' src='assets/img/home/clock-no-fill.svg' alt='clock icon'
+             (click)='handlePendingClick()' *ngIf='isShowMessagePending() && auditForm && getValue().status !== eAuditStatus.PENDING_REVIEW'/>
+         <img class='pointable' src='assets/img/home/trash-fill-grey.svg' width='19px' height='22px' alt='trash icon'
+              (click)='handleDelete()' *ngIf='isAuditor()'/>
+      </div>
+    </div>
+    <!-- Add the comments for the message -->
+    <div *ngIf='commentListForm?.length > 0'>
+      <hr/>
+      <div class='comment-list' *ngFor='let commentForm of commentListForm?.controls'>
+        <app-comment [commentForm]='commentForm' [replyRequired]='replyRequired'></app-comment>
+      </div>
+    </div>
+  </div>
+</form>

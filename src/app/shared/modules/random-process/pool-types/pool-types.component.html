@@ -1,0 +1,85 @@
+<div [formGroup]='inputForm'>
+   <div class='d-flex flex-column'>
+
+      <div class='d-flex flex-row mb-3'>
+         <div class='col-md-5'></div>
+         <div class='col-md-3'>Drug %</div>
+         <div class='col-md-3'>Alcohol %</div>
+      </div>
+      <div class='d-flex flex-row align-items-center' style='height: 62px'>
+         <div class='col-md-5'>
+            <app-auditable-checkbox label='PHMSA' forName='phmsa'
+                                    [ncms_id]='authService.getNcmsId()'
+                                    [auditAllForm]='auditAllForm'
+                                    field_id='random-process.poolTypes.phmsa'
+                                    [inputForm]='inputForm'></app-auditable-checkbox>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.phmsa'>
+            <app-auditable-input id='dba_name' [inputForm]='inputForm'
+                                 [auditAllForm]='auditAllForm' [ncms_id]='authService.getNcmsId()' [module]='module'
+                                 section='poolTypes' field_name='phmsa_drug_precent' label=''></app-auditable-input>
+         </div>
+      </div>
+      <div class='d-flex flex-row align-items-center' style='height: 62px'>
+         <div class='col-md-5'>
+            <app-auditable-checkbox label='FMCSA' forName='fmcsa'
+                                    [ncms_id]='authService.getNcmsId()'
+                                    [auditAllForm]='auditAllForm'
+                                    field_id='random-process.poolTypes.fmcsa'
+                                    [inputForm]='inputForm'></app-auditable-checkbox>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.fmcsa'>
+            <app-auditable-input id='fmcsa_drug_percent' [inputForm]='inputForm'
+                                 [auditAllForm]='auditAllForm' [ncms_id]='authService.getNcmsId()' [module]='module'
+                                 section='poolTypes' field_name='fmcsa_drug_percent' label=''></app-auditable-input>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.fmcsa'>
+            <app-auditable-input id='fmcsa_alcohol_percent' [inputForm]='inputForm'
+                                 [auditAllForm]='auditAllForm' [ncms_id]='authService.getNcmsId()' [module]='module'
+                                 section='poolTypes' field_name='fmcsa_alcohol_percent' label=''></app-auditable-input>
+         </div>
+      </div>
+      <div class='d-flex flex-row align-items-center' style='height: 62px'>
+         <div class='col-md-5'>
+            <app-auditable-checkbox label='FAA' forName='faa'
+                                    [ncms_id]='authService.getNcmsId()'
+                                    [auditAllForm]='auditAllForm'
+                                    field_id='random-process.poolTypes.faa'
+                                    [inputForm]='inputForm'></app-auditable-checkbox>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.faa'>
+            <input id='faa_drug_percent' class='form-control' formControlName='faa_drug_percent'/>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.faa'>
+            <input id='faa_alcohol_percent' class='form-control' formControlName='faa_alcohol_percent'/>
+         </div>
+      </div>
+      <div class='d-flex flex-row align-items-center' style='height: 62px'>
+         <div class='col-md-5'>
+            <app-auditable-checkbox label='FRA' forName='fra'
+                                    [ncms_id]='authService.getNcmsId()'
+                                    [auditAllForm]='auditAllForm'
+                                    field_id='random-process.poolTypes.fra'
+                                    [inputForm]='inputForm'></app-auditable-checkbox>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.fra'>
+            <input id='fra_drug_precent' class='form-control' formControlName='fra_drug_precent'/>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.fra'>
+            <input id='fra_alcohol_percent' class='form-control' formControlName='fra_alcohol_percent'/>
+         </div>
+      </div>
+      <div class='d-flex flex-row align-items-center' style='height: 62px' >
+         <div class='col-md-5'>
+            <app-auditable-checkbox label='USCG' forName='uscg'
+                                    [ncms_id]='authService.getNcmsId()'
+                                    [auditAllForm]='auditAllForm'
+                                    field_id='random-process.poolTypes.uscg'
+                                    [inputForm]='inputForm'></app-auditable-checkbox>
+         </div>
+         <div class='col-md-3 pe-3' *ngIf='inputForm.value.uscg'>
+            <input id='uscg_drug_percent' class='form-control' formControlName='uscg_drug_percent'/>
+         </div>
+      </div>
+   </div>
+</div>

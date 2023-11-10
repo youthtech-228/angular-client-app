@@ -1,0 +1,221 @@
+<div>
+   <div *ngIf='company && !isLoading'>
+      <form [formGroup]='pageForm' (ngSubmit)='save()'>
+         <app-module-base 
+            module='employee-list-validation'
+            [module]='module'
+            [isSaving]='isSaving'>
+            <app-titled-panel title='Employee List Validation' icon='assets/img/home/person-fill-white.svg' allowSave='false'>
+               <div class='d-flex background-style' style='width: 100%; margin-left: 20px;'>
+                  <app-sidebar>
+                     <div class='pt-5 pl-5 pr-5 pb-3'>
+                        <button class='btn btn-outline-secondary' type='button' back-button>< Back to Audit</button>
+                     </div>
+                     <hr>
+                     <div class='pt-3 pl-5 pr-5 pb-5' style="padding-right: 10px">
+                        <h6 class='subtitle '>EMPLOYEES</h6>
+                        <div class='container mt-3' style="max-height: 1150px;overflow-y: scroll;">
+                           <div class='row mb-2' *ngFor='let employee of employees'>
+                              <div class='col pl-0'>
+                                 <div class='form-check box-check'>
+                                    <label class='form-check-label form-label'>
+                                       <input class='form-check-input' type='radio' value='' (click)='onSelectEmployee(employee)'
+                                             id='defaultCheck5'
+                                             [checked]='selectedEmployee && (employee.id === selectedEmployee.id)'>
+                                       <div>{{employee.first_name + employee.last_name}}</div>
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </app-sidebar>
+                  <!--      <div class='flex-fill background-style'>-->
+                  <div class='container-fluid background-style pb-4 pt-4'>
+                     <div class='background-style2'></div>
+                     <div *ngIf='!selectedEmployee' style='margin-top: -203px; height: 100%'></div>
+                     <div *ngIf='selectedEmployee'>
+                        <div style='margin-top: -203px'>
+                           <app-employee-card [employee]='selectedEmployee' (validateEvent)="validate($event)"></app-employee-card>
+                           <div class='mt-5 row'>
+                              <div class='ml-3 mr-3' style='color: #777777; margin-top: -4px'>DOCUMENTS REQUIRED</div>
+                              <hr style='border-top-width: initial; flex: 1 1'>
+                           </div>
+                        </div>
+                        <div class='col-12 ml-auto mr-auto'>
+                           <div class='mt-4' *ngIf='!backgroundCheck && !otherDocument && !thirdOne'>
+                              <h6 class='card-title title-small-primary'>
+                                 No Documents Selected. Select the documents needed for this employee.
+                              </h6>
+                           </div>
+
+                           <div class='row'>
+                              <div class='col-md-6'>
+                                 <div class='mt-4'>
+                                    <h6 class='card-title title-small-primary'>
+                                       DrugTest
+                                    </h6>
+                                    <kendo-upload
+                                    [saveUrl]='uploadSaveUrl'
+                                    [removeUrl]='uploadRemoveUrl'
+                                    (upload)="onFileUpload($event,'DrugTest')"
+                                    (complete)="completeEventHandler($event)">
+                              </kendo-upload>
+                                 </div>
+                                 <div class="mt-4">
+                                    <div *ngFor="let file of uploadedFiles">
+                                       <div *ngIf="file.file_type=='DrugTest'" class="file-archive-item">
+                                          <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                                          <div class="file-archive-item-content">
+                                             <div class="file-archive-item-content-title">{{ file.name }}</div>
+                                          </div>
+                                          <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                                             X
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class='col-md-6'>
+                                 <app-message-panel
+                                    [ncms_id]='ncms_id'
+                                    [module]='module'
+                                    [section]="'DrugTest'"
+                                    [auditAllForm]='messageForm'>
+                                 </app-message-panel>
+                              </div>
+                           </div>
+                           <hr style='border-top-width: initial; flex: 1 1'>
+
+                           <div class='row'>
+                              <div class='col-md-6'>
+                                 <div class='mt-4'>
+                                    <h6 class='card-title title-small-primary'>
+                                       AlcoholTest
+                                    </h6>
+                                    <kendo-upload
+                                          [saveUrl]='uploadSaveUrl'
+                                          [removeUrl]='uploadRemoveUrl'
+                                          (upload)="onFileUpload($event,'AlcoholTest')"
+                                          (complete)="completeEventHandler($event)">
+                                    </kendo-upload>
+                                 </div>
+                                 <div class="mt-4">
+                                    <div *ngFor="let file of uploadedFiles">
+                                       <div *ngIf="file.file_type=='AlcoholTest'" class="file-archive-item">
+                                          <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                                          <div class="file-archive-item-content">
+                                             <div class="file-archive-item-content-title">{{ file.name }}</div>
+                                          </div>
+                                          <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                                             X
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class='col-md-6'>
+                                 <app-message-panel
+                                    [ncms_id]='ncms_id'
+                                    [module]='module'
+                                    [section]="'AlcholTest'"
+                                    [auditAllForm]='messageForm'>
+                                 </app-message-panel>
+                              </div>
+                           </div>
+                           <hr style='border-top-width: initial; flex: 1 1'>
+
+                           <div class='row'>
+                              <div class='col-md-6'>
+                                 <div class='mt-4'>
+                                    <h6 class='card-title title-small-primary'>
+                                       Identification
+                                    </h6>
+                                    <kendo-upload
+                                          [saveUrl]='uploadSaveUrl'
+                                          [removeUrl]='uploadRemoveUrl'
+                                          (upload)="onFileUpload($event,'Identification')"
+                                          (complete)="completeEventHandler($event)">
+                                    </kendo-upload>
+                                 </div>
+                                 <div class="mt-4">
+                                    <div *ngFor="let file of uploadedFiles">
+                                       <div *ngIf="file.file_type=='Identification'" class="file-archive-item">
+                                          <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                                          <div class="file-archive-item-content">
+                                             <div class="file-archive-item-content-title">{{ file.name }}</div>
+                                          </div>
+                                          <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                                             X
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class='col-md-6'>
+                                 <app-message-panel
+                                    [ncms_id]='ncms_id'
+                                    [module]='module'
+                                    [section]="'Identification'"
+                                    [auditAllForm]='messageForm'>
+                                 </app-message-panel>
+                              </div>
+                           </div>
+                           <hr style='border-top-width: initial; flex: 1 1'>
+
+                           <div class='row'>
+                              <div class='col-md-6'>
+                                 <div class='mt-4'>
+                                    <h6 class='card-title title-small-primary'>
+                                       Other
+                                    </h6>
+                                    <kendo-upload
+                                          [saveUrl]='uploadSaveUrl'
+                                          [removeUrl]='uploadRemoveUrl'
+                                          (upload)="onFileUpload($event,'Other')"
+                                          (complete)="completeEventHandler($event)">
+                                    </kendo-upload>
+                                 </div>
+                                 <div class="mt-4">
+                                    <div *ngFor="let file of uploadedFiles">
+                                       <div *ngIf="file.file_type=='Other'" class="file-archive-item">
+                                          <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                                          <div class="file-archive-item-content">
+                                             <div class="file-archive-item-content-title">{{ file.name }}</div>
+                                          </div>
+                                          <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                                             X
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class='col-md-6'>
+                                 <app-message-panel
+                                    [ncms_id]='ncms_id'
+                                    [module]='module'
+                                    [section]="'Other'"
+                                    [auditAllForm]='messageForm'>
+                                 </app-message-panel>
+                              </div>
+                           </div>
+                           <hr style='border-top-width: initial; flex: 1 1'>
+
+               
+                           <div class='float-right mt-5' style="display: none;">
+                              <button class='btn btn-lg btn-cancel mr-3' (click)='onClose()'>Cancel</button>
+                              <button class='btn btn-lg btn-success'>Save</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </app-titled-panel>
+         </app-module-base>
+      </form>
+   </div>
+   <div *ngIf='!company || isLoading' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

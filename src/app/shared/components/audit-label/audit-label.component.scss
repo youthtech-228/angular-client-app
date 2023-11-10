@@ -1,0 +1,22 @@
+.needs-attention {
+  color: var(--ncms-color-primary-red-bright);
+}
+
+.group-title img {
+  padding-bottom: 4px;
+}
+
+.group-title {
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+
+  label {
+    cursor: pointer;
+  }
+}
+label {
+  margin-left: 0;
+  margin-bottom: 5px;
+}

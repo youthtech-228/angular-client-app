@@ -1,0 +1,75 @@
+<app-module-base module="supervisor-training" [pageTitle]="'Supervisor Training'" instructions="You must ensure that persons, designated to determine whether reasonable suspicion exists to require a covered
+employee to undergo alcohol and/or drug testing, receive at least 60 minutes of alcohol training and 60 minutes of
+drug training on the physical, behavioral, speech, and performance indicators of probable alcohol and drug misuse.
+
+The number of supervisors required to complete the training depends on the number of employees in your DOT
+program. If you have 50 or less employees then at least one supervisor must complete the training. If you have
+over 50 employees then at least two supervisors must complete the training.">
+   <app-section [title]='"Acknowledgement"'>
+      <div class='row'>
+         <div class='col-md-6'>
+            <div class='form-check mt-4'>
+               <input class='form-check-input' type='checkbox' value='' id='defaultCheck1'>
+               <label class='form-check-label text-lg text-color-primary' for='defaultCheck1'>
+                  I have read and understand all the above listed requirements and will ensure my company will follow
+                  them.
+               </label>
+            </div>
+         </div>
+         <div class='col-md-6'>
+            <app-message-panel ></app-message-panel>
+         </div>
+      </div>
+   </app-section>
+   <app-section [title]='"Supervisor Training"'>
+      <div class='row'>
+         <div class='col-md-6 mb-4'>
+            <div class='form-check form-check-inline mb-4'>
+               <div class='text-lg'>
+                  Please populate your list of supervisors who have been trained using one of the following options.
+                  Each option updates your list in real-time. Clicking save simply marks this audit step as completed.
+                  If your list is already current, you can click Save to mark this step as completed.
+
+                  Option 1 - You can use the grid to maintain your list one employee at a time (this is often the best
+                  option if you only have a few supervisors on your list).
+
+                  Option 2 - You can also upload your list using the template available below.
+
+                  This process updates your list in real-time. Clicking save simply marks this audit step as completed.
+                  If your list is already current, you can click Save to mark this step as completed.
+               </div>
+            </div>
+            <app-supervisor-traning-list></app-supervisor-traning-list>
+         </div>
+         <div class='col-md-6'>
+            <app-message-panel ></app-message-panel>
+         </div>
+      </div>
+      <div class='text-lg me-4'>
+         <p>You can <strong>replace</strong> your current supervisor training list with one that you upload. This is helpful if you have many supervisors and require many modifications to your list. There are a few pre-requisites: you must use a template that
+            is provided above and the templates are in Microsoft Excel format and therefore should be modified using Microsoft Excel. Using another software application (Libre Office for example) to modify the Excel documents may not work.
+         </p>
+         <span>To import a new Supervisor Training List please use the following procedure:</span>
+         <ol>
+            <li>Download the template .xls document or your current supervisor training list in .xls fomat using the buttons above. Using any other file to upload your data will cause your import to fail. </li>
+            <li>Modify the document according to the instructions contained within the document.</li>
+            <li>Save the file on your computer and close the file. (uploading open files will fail)</li>
+            <li>Click Select to locate the file and browse to the file you want to upload.</li>
+            <li>Click the Import button to process the uploaded file.</li>
+            <li>If the data in your file is valid, your current Supervisor Training list will be replaced with the data you imported.</li>
+            <li>If there are errors in the file you uploaded, your Supervisor Training list will not be replaced and you will be notified of invalid entries.</li>
+         </ol>
+      </div>
+      <div class='mt-4'>
+         <h6 class='card-title title-small-primary'>
+            Upload Supervisor Training List
+         </h6>
+         <kendo-upload
+               [saveUrl]='uploadSaveUrl'
+               [removeUrl]='uploadRemoveUrl'>
+         </kendo-upload>
+      </div>
+
+   </app-section>
+
+</app-module-base>

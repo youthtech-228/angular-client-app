@@ -1,0 +1,6 @@
+<span kendoTooltip [tooltipClass]="type === eInfoType.info ? 'info-style' : 'error-style'" style="text-align: center; padding-top: 10px;" >
+   <img src="assets/img/home/alert-circle-fill.svg" [attr.data-placement]='placement'
+     [title]='info' style='white-space: nowrap' *ngIf='type === eInfoType.info'/>
+   <img src='assets/img/home/alert-circle-fill-red.svg' [attr.data-placement]='placement'
+     [title]='info' style='white-space: nowrap' *ngIf='type === eInfoType.error'/>
+</span>

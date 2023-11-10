@@ -1,0 +1,6 @@
+<div class="container">
+   <p class="collapse" id="collapsePanel" #collapsePanel aria-expanded="false">
+      <ng-content></ng-content>
+   </p>
+   <a role="button" class="collapsed" data-bs-toggle="collapse" href="#collapsePanel" aria-expanded="false" aria-controls="collapsePanel" *ngIf="isOverflow"></a>
+</div>

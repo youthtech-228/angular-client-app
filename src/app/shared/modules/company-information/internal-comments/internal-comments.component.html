@@ -1,0 +1,14 @@
+<div class='internal-wrapper'>
+   <div class='internal-box-title'>
+      <img width='37px' height='39px' src='assets/img/home/chat-fill.svg'/>
+      <div class='title-large ms-4'>Internal Comments</div>
+   </div>
+   <div *ngFor='let comment of comments' class='internal-box-content ps-4 pe-1 pt-4 pb-4'>
+      <app-internal-comment [module]='module' [commentListForm]='commentListForm' [comment]='comment'
+                            (delete)='handleDelete($event)' *ngIf='!comment.archivedDate'
+      ></app-internal-comment>
+   </div>
+   <div class='m-4 pb-4'>
+      <button class='btn btn-lg btn-secondary' type='button' (click)='handleAddNewComment()'>Add Comment</button>
+   </div>
+</div>

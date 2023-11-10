@@ -1,0 +1,28 @@
+<form class='comment-content' [formGroup]='commentForm'>
+   <div class='content-text justify-content-between'>
+      <div [style.display]='isEditing ? "block" : "none"'>
+         <div class='w-100' *ngIf='!commentForm?.controls?.text.valid' >
+            <div class='ms-auto' style='width: fit-content' >
+               <em style='color: var(--ncms-color-primary-red-bright)'>Required</em>
+            </div>
+         </div>
+         <textarea id='new comment' #commentInput class='w-100' name='Comment' rows='3'
+                   (focus)='hasFocus = true'
+                   (blur)='handleEndEditing()'
+                   formControlName='text'>
+         </textarea>
+      </div>
+      <div *ngIf='!isEditing' class='label-normal' (click)='handleStartEditing()'>
+         {{commentForm.value.text}}
+      </div>
+      <div class='content-comment'>
+         <img src='assets/img/home/person-fill-small.svg' alt='person icon'/>
+         <span class='label-small' style='font-weight: bold'>
+               {{commentForm.value.created_by}}
+            </span>
+         <span *ngIf='commentForm.value.created_date' class='label-small text-muted ms-1'>
+               {{commentForm.value.created_date | dateDotNet | date : 'M/d/yyyy, h:mm a'}}
+            </span>
+      </div>
+   </div>
+</form>

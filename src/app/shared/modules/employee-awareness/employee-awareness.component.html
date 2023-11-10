@@ -1,0 +1,47 @@
+<app-module-base
+   [instructions]='instructions' 
+   [pageTitle]="'Employee Awareness'" 
+   [module]='"employee-awareness"'>
+   <app-section [title]='"Employee Awareness Process Acknowledgement"'>
+      <div class='row'>
+         <div class='col-md-6'>
+            <div class='form-check'>
+               <input class='form-check-input' type='checkbox' value='' id='defaultCheck1'>
+               <label class='form-check-label' for='defaultCheck1'>
+                  I acknowledge my company has established an employee awareness process that addresses the areas listed
+                  above.
+               </label>
+            </div>
+            <div class='mt-4'>
+               <h6 class='card-title title-small-primary'>
+                  Upload Files
+               </h6>
+               <kendo-upload
+                     [saveUrl]='uploadSaveUrl'
+                     [removeUrl]='uploadRemoveUrl'
+                     (upload)="onFileUpload($event)"
+                     (complete)="completeEventHandler()">
+               </kendo-upload>
+            </div>
+            <div class="mt-4">
+               <div *ngFor="let file of uploadedFiles" class="file-archive-item">
+                  <img src="assets/img/home/file.png" alt="" class="file-archive-item-icon">
+                  <div class="file-archive-item-content">
+                     <div class="file-archive-item-content-title">{{ file.name }}</div>
+                  </div>
+                  <button class="file-archive-item-btn file-archive-item-btn-close" (click)="onDelete(file.id)">
+                     X
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div class='col-md-6'>
+            <app-message-panel 
+               [ncms_id]='ncms_id' 
+               [module]='module' 
+               [section]='section' 
+               [auditAllForm]='auditAllForm'></app-message-panel>
+         </div>
+      </div>
+   </app-section>
+</app-module-base>

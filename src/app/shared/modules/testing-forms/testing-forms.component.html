@@ -1,0 +1,62 @@
+<div>
+   <div *ngIf='!isLoading'>
+      <form [formGroup]='pageForm' (ngSubmit)='save()'>
+         <app-module-base 
+            [module]='module'
+            [alertMessage]="alertMessage" 
+            [isSaving]='isSaving' 
+            [instructions]='instructions' 
+            [pageTitle]="'Testing Forms'">
+            <app-section [title]='"DOT Drug Testing Forms"'>
+               <div class='row'>
+                  <div class='col-md-6'>
+                     <div class='mt-4'>
+                        <h6 class='card-title title-small-primary'>
+                           Upload Files
+                        </h6>
+                        <kendo-upload
+                           [saveUrl]='uploadSaveUrl'
+                           [removeUrl]='uploadRemoveUrl'
+                           [ngModel]='uploadedFiles'
+                           [autoUpload]="true"
+                           removeMethod='delete'
+                           (upload)="onFileUpload($event)"
+                           (remove)="onFileRemove($event)"
+                           (complete)="completeEventHandler($event)"
+                           (clear)="onFileClear()"
+                           (success)="successEventHandler($event)"
+                           [ngModelOptions]="{standalone: true}">
+                        </kendo-upload>
+                     </div>
+                  </div>
+                  <div class='col-md-6'>
+                     <app-message-panel 
+                        [ncms_id]='ncms_id' 
+                        [module]='module' 
+                        [section]="'testing-form-root'" 
+                        [auditAllForm]='messageForm'></app-message-panel>
+                  </div>
+               </div>
+               <div class="row">
+                  <div 
+                     *ngIf="countOfFiles == 0" 
+                     class="col-md-12"
+                  >
+                     <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <img src="assets/img/home/alert-triangle-fill.svg" alt="" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2">
+                        <div>
+                           The DOT Drug Testing Forms section is not complete.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </app-section>
+
+         </app-module-base>
+      </form>
+   </div>
+   <div *ngIf='isLoading' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

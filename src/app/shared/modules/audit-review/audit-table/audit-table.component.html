@@ -1,0 +1,54 @@
+<kendo-grid
+      [kendoGridBinding]="gridData"
+      kendoGridSelectBy="id"
+      (dataStateChange)="onDataStateChange($event)"
+      [selectedKeys]="mySelection"
+      [pageSize]="20"
+      [pageable]="true"
+      [sortable]="true"
+      [groupable]="false"
+      [reorderable]="true"
+      [resizable]="true"
+      [height]="480"
+      [columnMenu]="{ filter: true }"
+      style="max-width: 1614px"
+>
+   <ng-template kendoGridToolbarTemplate>
+      <input placeholder="Search in all columns..." kendoTextBox />
+      <button kendoGridExcelCommand type="button" icon="file-excel" style="float:right;">Export to Excel</button>
+      <button kendoGridPDFCommand icon="file-pdf" style="float:right;">Export to PDF</button>
+   </ng-template>
+   <kendo-grid-column field="complete" title="Item Status" [width]="120" [locked]='true' [reorderable]='false'
+                      [resizable]='false'>
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <img src='assets/img/home/alert-triangle-fill.svg' width="20" *ngIf="dataItem.status === eAuditStatus.NEEDS_ATTENTION"/>
+         <img src='assets/img/home/clock-fill.svg' width="20" *ngIf="dataItem.status === eAuditStatus.PENDING_REVIEW"/>
+         <img src='assets/img/home/star-fill.svg' width="20" *ngIf="dataItem.status === eAuditStatus.PASSED"/>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="audit" title="Audit Section" [width]="90">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="first-name">{{ dataItem.audit }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="ncms_official" title="NCMS Official" [width]="160">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="last-name">{{ dataItem.ncms_official }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="ncms_official_date" title="Date" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="last-name">{{ dataItem.ncms_official_date }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="contractor_representative" title="Contractor Representative" [width]="160">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="recent-drug-date">{{ dataItem.contractor_representative }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="contractor_representative_date" title="Date" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="recent-drug-date">{{ dataItem.contractor_representative_date }}</div>
+      </ng-template>
+   </kendo-grid-column>
+</kendo-grid>

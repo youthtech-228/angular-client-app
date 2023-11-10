@@ -1,0 +1,6 @@
+<div class="message-center pointable">
+   <h4>
+      <ng-content select="message-center-title"></ng-content>
+   </h4>
+   <ng-content select="message-center-body" *ngIf="visible"></ng-content>
+</div>

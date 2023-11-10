@@ -1,0 +1,60 @@
+.comment-list {
+  border-bottom: solid 1px #dddddd;
+  margin: 0 0 0 78px;
+  padding: 18px 18px 18px 0;
+
+  &:nth-child(2) {
+    padding-top: 0 !important;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0 !important;
+  }
+}
+
+.content-comment {
+  margin-top: 15px;
+
+  img {
+    margin-bottom: -1px;
+  }
+}
+
+.message-content {
+  .content-title {
+    display: flex;
+    align-items: center;
+
+    .title {
+      font-size: 17px;
+      font-weight: bold;
+    }
+  }
+
+  .content-text {
+    display: flex;
+
+
+    .icon-text {
+      margin-left: 20px;
+
+    }
+  }
+}
+
+.icon {
+  vertical-align: text-top;
+  width: 33.7px;
+  height: 31.6px;
+}
+
+.inactive {
+  color: var(--ncms-color-text-disabled) !important;
+}
+
+//TODO Daniel to change color to final value
+.ncms-user {
+  color: darkred;
+}
+

@@ -1,0 +1,88 @@
+<div>
+   <div *ngIf='(!showHistory && getMessages()?.length > 0 && messageTemplates) || (showHistory && archiveAuditMessages?.length > 0)'>
+      <div class='message-box overflow-hidden'>
+         <div class='message-title'>
+            <div class='title-right'>
+               <img src='assets/img/home/inboxes-fill.svg' alt='inboxes'/>
+               <div class='d-flex flex-column'>
+                  <div class='title'>Messages</div>
+                  <div id='historyId' *ngIf='showHistory' class='mt-1 title-small-primary'>History</div>
+               </div>
+            </div>
+            <div class='d-flex title-left flex-row'>
+               <img class='btn btn-icon icon-pen btn-icon-normal' src='assets/img/home/x.svg' alt='edit'
+                    (click)='addMessage()'/>
+
+               <div *ngIf='isAuditor()'>
+                  <!-- duplicate because angular issue doesn't display divs with *ngIf with animation-->
+                  <div class='dropleft me-3' *ngIf='showHistory'>
+                     <div class='btn btn-icon-normal' data-bs-toggle='dropdown'>
+                        <img class='icon-dot' src='assets/img/home/three-dots-vertical.svg' alt='vertical dots'/>
+                     </div>
+                     <div class='dropdown-menu' aria-labelledby='dropdownMenu2'>
+                        <button class='dropdown-item' type='button' (click)='handleShowHistory(false)'>
+                           Hide Message History
+                        </button>
+                     </div>
+                  </div>
+                  <!-- duplicate because angular issue doesn't display divs with *ngIf with animation-->
+                  <div class='dropleft  me-3' *ngIf='!showHistory'>
+                     <div class='btn btn-icon-normal' data-bs-toggle='dropdown'>
+                        <img class='icon-dot' src='assets/img/home/three-dots-vertical.svg' alt='vertical dots'/>
+                     </div>
+                     <div class='dropdown-menu' aria-labelledby='dropdownMenu2' *ngIf='!showHistory'>
+                        <button class='dropdown-item' type='button' (click)='handleShowHistory(true)'>
+                           Show Message History
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <div [id]='"messageListId"+section' class='overflow-auto message-list-frame' *ngIf='!showHistory'>
+               <div class='message-content' *ngFor='let control of getMessages()'>
+                  <app-message [auditForm]='control' [replyRequired]='getIsReplyRequired(control)'
+                               [messageTemplates]='getMessageTemplates(control)' ></app-message>
+               </div>
+            </div>
+            <div *ngIf='showHistory && archiveAuditMessages?.length > 0' class='overflow-auto message-list-frame'>
+               <div class='message-content' *ngFor='let message of archiveAuditMessages'>
+                  <app-message-history [message]='message'></app-message-history>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div *ngIf='(!showHistory && getMessages()?.length <= 0) || (showHistory && archiveAuditMessages?.length <= 0)'>
+      <div class='box-third-right'>
+         <div class='box-icon'>
+            <img src='assets/img/home/inboxes-fill.svg' alt='inboxes'/>
+         </div>
+         <div class='box-title'>No Messages</div>
+
+         <!-- Hide the Add New button when history is showing unless there aren't any messages at all.      -->
+         <button class='btn btn-md btn-outline-dark' (click)='addMessage()' *ngIf='!showHistory || getMessages()?.length <= 0' type='button'>
+            Add New
+         </button>
+         <!-- Show the view history button until we fetch history and there isn't any.    -->
+         <div *ngIf='!fetchingArchive && archiveAuditMessages === undefined'>
+            <div class='box-link pointable' (click)='handleShowHistory(true)'>
+               <u>View Message History</u>
+            </div>
+         </div>
+         <!-- Only show the Hide button if there are other messages to view.    -->
+         <div *ngIf='!fetchingArchive && showHistory && getMessages()?.length > 0'>
+            <div class='box-link pointable' (click)='handleShowHistory(false)'>
+               <u>Hide Message History</u>
+            </div>
+         </div>
+         <!-- Show No Message History after fetching and not finding any history.    -->
+         <img *ngIf='fetchingArchive' src='assets/img/home/ios-spinner.min.svg' width='16px' height='16px' class='mt-2'
+              alt='saving icon'/>
+         <div *ngIf='archiveAuditMessages?.length === 0' class='mt-2'>
+            No Message History
+         </div>
+      </div>
+   </div>
+</div>

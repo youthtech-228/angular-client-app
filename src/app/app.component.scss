@@ -1,0 +1,49 @@
+$font-size-base: 1rem;
+$h1-font-size: $font-size-base * 2.25;
+$primary: #508bd5;
+$border-color: #707070;
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+@import "variables";
+
+body {
+   padding: 25.5px 44px 0 39.2px;
+  font-size: 18px;
+   background-color: #481322;
+
+   height: 100%;
+   width: 100vw;
+
+   .logo {
+      margin-bottom: 25px;
+   }
+}
+
+.app-content {
+   background-color: white;
+   padding: 20px;
+   width: 100%;
+}
+
+$title-font-size: $font-size-base * 2.25 !default;
+
+.title-large {
+   font-size: $h1-font-size;
+   color: $text-primary-color;
+}
+
+.title-primary {
+   color: $text-primary-color;
+   font-weight: bold;
+}
+
+.subtitle-large {
+   font-size: $h5-font-size;
+   color: $text-secondary-color;
+}
+
+.btn-submit {
+   background-color: $btn-submit-color;
+}

@@ -1,0 +1,26 @@
+<div class='audit-wrapper'>
+   <div class='audit-title-box'>
+      <div class='audit-icon-box'>
+         <img src='assets/img/home/columns.svg'/>
+      </div>
+      <div class='audit-title'>Modules</div>
+      <label class='switch'>
+         <input type='checkbox'/>
+         <span class='slider round'></span>
+      </label>
+   </div>
+   <div class='audit-content-box'>
+      <a *ngFor='let module of moduleList' class='module-list-item-wrapper' routerLink='{{module.path}}'
+         routerLinkActive='active-button'>
+         <div class='audit-icon-box me-3'>
+            <img src='assets/img/home/alert-triangle-fill.svg' width='20'
+                 *ngIf='module.status === eAuditStatus.NEEDS_ATTENTION'/>
+            <img src='assets/img/home/clock-fill.svg' width='20' *ngIf='module.status === eAuditStatus.PENDING_REVIEW'/>
+            <img src='assets/img/home/star-fill-color.svg' width='20' *ngIf='module.status === eAuditStatus.PASSED'/>
+         </div>
+         <div class='content-title'>
+            {{ module.title }}
+         </div>
+      </a>
+   </div>
+</div>

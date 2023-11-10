@@ -1,0 +1,12 @@
+<div class='btn btn-md btn-outline-dark' data-bs-toggle='dropdown'>
+   Select NCMS ID
+</div>
+<div class='dropdown-menu' aria-labelledby='dropdownMenu3'>
+   <div class='message-content' *ngFor='let ncmsId of getNcmsIdList()'>
+      <button class='dropdown-item' type='button'
+              (click)='handleChangeNcmsId(ncmsId)'>
+         {{ncmsId}}
+      </button>
+   </div>
+</div>
+

@@ -1,0 +1,285 @@
+<svg xmlns='http://www.w3.org/2000/svg' style='display: none;'>
+   <symbol id='check-circle-fill' fill='currentColor' viewBox='0 0 16 16'>
+      <path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'/>
+   </symbol>
+   <symbol id='info-fill' fill='currentColor' viewBox='0 0 16 16'>
+      <path d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'/>
+   </symbol>
+   <symbol id='exclamation-triangle-fill' fill='currentColor' viewBox='0 0 16 16'>
+      <path d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/>
+   </symbol>
+</svg>
+
+<app-module-base [instructions]='instructions' [pageTitle]="'Random Process'" *ngIf='randomProcess'>
+   <ng-template #template>
+      Your data has been saved. Time for tea!
+   </ng-template>
+   <ng-template #errorTemplate>
+      {{errorMessage}}
+   </ng-template>
+   <ng-template #saveTemplate>
+      <span class='text-sm me-3'>Your data has changed.</span>
+      <button class='btn btn-outline-white btn-sm' type='button' [ngClass]="{ 'saving-bg' : isSaving }"
+              (click)='save()'>
+         <img *ngIf='isSaving' src='assets/img/home/ios-spinner.min.svg' width='16px' height='16px' alt='saving icon'/>
+         Save
+      </button>
+   </ng-template>
+   <ng-template #sendTemplate>
+      <span class='text-sm me-3'>Your data has not been sent to the contractor.</span>
+      <button class='btn btn-outline-white btn-sm' (click)='send()'>
+         Send
+      </button>
+   </ng-template>
+   <div *ngIf='!isLoading && randomProcess && auditAllForm'>
+      <form [formGroup]='inputForm' (ngSubmit)='save()'>
+         <app-section [title]='"Pool Types"'>
+            <div class='row'>
+               <div class='col-md-7 mb-2'>
+                  <div class='form-check-inline mb-4'>
+                     <div class='text-lg me-4'>
+                        Indicate all DOT agency random pools that consist of your employees, who would or could be
+                        performing
+                        PHMSA covered job functions for our clients.
+                     </div>
+                  </div>
+                  <app-pool-types [randomProcess]='randomProcess' [module]='module' section='poolType'
+                                  [auditAllForm]='auditAllForm' [inputForm]='inputForm'></app-pool-types>
+               </div>
+               <div class='col-md-5'>
+                  <app-message-panel [ncms_id]='ncms_id' [module]='module' section='poolTypes'
+                                     [auditAllForm]='auditAllForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+         <app-section title='Consortium Pool'>
+            <div class='row'>
+               <div class='col-md-7'>
+                  <div class='form-check form-check-inline'>
+                     <div class='text-lg me-4'>
+                        Is your company part of a "consortium pool" (a group of multiple employees from different
+                        companies)?
+                        <app-button-info
+                              info='A Consortium Pool is a group of companies combining their employees together into one random testing pool.'
+                              placement='bottom'></app-button-info>
+                     </div>
+                     <div class='d-flex align-items-center flex-row'>
+                        <div class='d-flex align-items-center flex-row' style='width: 150px'>
+                           <input id='consortium_poolYes' type='radio' class='custom-control-input' value='Yes'
+                                  name='consortium_pool' formControlName='consortium_pool'>
+                           <app-auditable-generic label='Yes' [module]='module' section='consortiumPool'
+                                                  field_name='consortium_pool' record_id='Yes' forName='type'
+                                                  [auditAllForm]='auditAllForm'></app-auditable-generic>
+                        </div>
+
+                        <div class='d-flex align-items-center flex-row' style='width: 150px'>
+                           <input id='consortium_poolNo' type='radio' class='custom-control-input' value='No'
+                                  name='consortium_pool' formControlName='consortium_pool'>
+                           <app-auditable-generic label='No' [module]='module' section='consortiumPool'
+                                                  field_name='consortium_pool' record_id='No' forName='type'
+                                                  [auditAllForm]='auditAllForm'></app-auditable-generic>
+                        </div>
+                     </div>
+                     <div class='mt-3' *ngIf='inputForm?.value?.consortium_pool === "Yes"'>
+                        <app-auditable-checkbox label='PHMSA' forName='tpa_phmsa'
+                                                [ncms_id]='authService.getNcmsId()'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='random-process.consortiumPool.tpa_phmsa'
+                                                [inputForm]='inputForm'></app-auditable-checkbox>
+                        <app-auditable-checkbox label='FMCSA' forName='tpa_fmcsa'
+                                                [ncms_id]='authService.getNcmsId()'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='random-process.consortiumPool.tpa_fmcsa'
+                                                [inputForm]='inputForm'></app-auditable-checkbox>
+                        <app-auditable-checkbox label='FAA' forName='tpa_faa'
+                                                [ncms_id]='authService.getNcmsId()'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='random-process.consortiumPool.tpa_faa'
+                                                [inputForm]='inputForm'></app-auditable-checkbox>
+                        <app-auditable-checkbox label='FRA' forName='tpa_fra'
+                                                [ncms_id]='authService.getNcmsId()'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='random-process.consortiumPool.tpa_fra'
+                                                [inputForm]='inputForm'></app-auditable-checkbox>
+                        <app-auditable-checkbox label='USCG' forName='tpa_uscg'
+                                                [ncms_id]='authService.getNcmsId()'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='random-process.consortiumPool.tpa_uscg'
+                                                [inputForm]='inputForm'></app-auditable-checkbox>
+                        <div class='alert alert-primary d-flex align-items-center' role='alert'>
+                           <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Info:'>
+                              <use xlink:href='#info-fill'/>
+                           </svg>
+                           <div>
+                              Your TPA (Third Party Administrator) must provide NCMS with information and confirmation
+                              pertaining to the consortium pool. Have your TPA send you a letter that details the
+                              following:
+                              Confirmation from TPA that your company is part of a "consortium" pool.
+                              Confirmation that the TPA is willing to provide statistical data on this consortium pool,
+                              utilizing the NCMS template. Statistical data reports are due twice a year (1st and 2nd
+                              quarters are due July 31st and the full year data report is due by January 15th of each
+                              year).
+                           </div>
+                        </div>
+                        <app-upload-files [fetchType]='module + "_TPA"'></app-upload-files>
+                     </div>
+                  </div>
+               </div>
+               <div class='col-md-5'>
+                  <app-message-panel [ncms_id]='ncms_id' [module]='module' section='consortiumPool'
+                                     [auditAllForm]='auditAllForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+         <app-section title='Random Selection Frequency'>
+            <div class='row'>
+               <div class='col-md-7'>
+                  <div class='text-lg me-4'>
+                     How often do random selections occur in this pool?
+                     <app-button-info
+                           info='A Consortium Pool is a group of companies combining their employees together into one random testing pool.'
+                           placement='bottom'></app-button-info>
+                  </div>
+                  <div class='d-flex align-items-center flex-row'>
+                     <div class='d-flex align-items-center flex-row' style='width: 200px'>
+                        <input id='selectionFrequencyMonthly' type='radio' class='custom-control-input'
+                               value='Monthly'
+                               name='selection_frequency' formControlName='selection_frequency'>
+                        <!--                        <label class="custom-control-label" for="consortium_poolYes" >Yes</label>-->
+                        <app-auditable-generic label='Monthly' [module]='module' section='selectionFrequency'
+                                               field_name='selection_frequency' record_id='Monthly' forName='type'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+
+                     <div class='d-flex align-items-center flex-row' style='width: 200px'>
+                        <input id='consortium_poolQuarterly' type='radio' class='custom-control-input'
+                               value='Quarterly'
+                               name='selection_frequency' formControlName='selection_frequency'>
+                        <app-auditable-generic label='Quarterly' [module]='module' section='selectionFrequency'
+                                               field_name='selection_frequency' record_id='Quarterly' forName='type'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+                  </div>
+               </div>
+               <div class='col-md-5'>
+                  <app-message-panel [ncms_id]='ncms_id' [module]='module' section='selectionFrequency'
+                                     [auditAllForm]='auditAllForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+         <app-section title='Random Draws'>
+            <div class='row'>
+               <div class='col-md-7'>
+                  <div class='text-lg me-4'>
+                     Do you select alternate draws in case the initial selected employee was unable to complete their
+                     random test?:
+                     <app-button-info
+                           info='A Consortium Pool is a group of companies combining their employees together into one random testing pool.'
+                           placement='bottom'></app-button-info>
+                  </div>
+                  <div class='d-flex align-items-center flex-row'>
+                     <div class='d-flex align-items-center flex-row' style='width: 150px'>
+                        <input id='alternateDrawsYes' type='radio' class='custom-control-input' value='Yes'
+                               name='alternate_draws' formControlName='alternate_draws'>
+                        <app-auditable-generic label='Yes' [module]='module' section='alternateDraws'
+                                               field_name='alternate_draws' record_id='Yes' forName='type'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+
+                     <div class='d-flex align-items-center flex-row' style='width: 150px'>
+                        <input id='alternateDrawsNo' type='radio' class='custom-control-input' value='No'
+                               name='alternate_draws' formControlName='alternate_draws'>
+                        <app-auditable-generic label='No' [module]='module' section='alternateDraws'
+                                               field_name='alternate_draws' record_id='No' forName='type'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+                  </div>
+                  <div *ngIf='inputForm.value.alternate_draws === "No"' class='w-100 mt-3'>
+                     <app-auditable-input id='alternateDraws' [inputForm]='inputForm' rows='2'
+                                          [auditAllForm]='auditAllForm' [ncms_id]='authService.getNcmsId()'
+                                          [module]='module'
+
+                                          section='alternateDraws' field_name='alternate_draws_explanation'
+                                          label='Explanation'>
+                        <app-button-info [type]='eInfoType.error'
+                                         info='Explain how you ensure the requirement of random testing quarterly if the employee is unable to perform the random test.'></app-button-info>
+                     </app-auditable-input>
+                  </div>
+               </div>
+               <div class='col-md-5'>
+                  <app-message-panel [ncms_id]='ncms_id' [module]='module' section='alternateDraws'
+                                     [auditAllForm]='auditAllForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+         <app-section title='Random Selection Process Pool'>
+            <div class='d-flex flex-row'>
+               <div class='col-md-7'>
+                  <div class='text-lg me-4'>
+                     Your company must use a scientifically based random selection process for random draws. What
+                     process does your company or your third party administrator use?:
+                     <app-button-info
+                           info='A Consortium Pool is a group of companies combining their employees together into one random testing pool.'
+                           placement='bottom'></app-button-info>
+                  </div>
+                  <div class='d-flex flex-column'>
+                     <div class='d-flex align-items-center flex-row' style='width: 380px'>
+                        <input id='alternate_drawsGenerator' type='radio' class='custom-control-input'
+                               value='Random Number Generator'
+                               name='alternate_draws_explanation' formControlName='alternate_draws_explanation'>
+                        <!--                        <label class="custom-control-label" for="consortium_poolYes" >Yes</label>-->
+                        <app-auditable-generic label='Random Number Generator' [module]='module'
+                                               section='alternateDraw'
+                                               field_name='alternate_draws_explanation'
+                                               record_id='alternate_drawsGenerator'
+                                               forName='alternate_draws_explanation'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+
+                     <div class='d-flex align-items-center flex-row' style='width: 380px'>
+                        <input id='alternate_drawsTable' type='radio' class='custom-control-input'
+                               value='Random Number Table'
+                               name='alternate_draws_explanation' formControlName='alternate_draws_explanation'>
+                        <app-auditable-generic label='Random Number Table' [module]='module' section='alternateDraw'
+                                               field_name='alternate_draws_explanation'
+                                               record_id='alternate_drawsTable' forName='alternate_draws_explanation'
+                                               [auditAllForm]='auditAllForm'></app-auditable-generic>
+                     </div>
+                  </div>
+               </div>
+               <div class='col-md-5'>
+                  <app-message-panel [ncms_id]='ncms_id' [module]='module' section='alternateDraw'
+                                     [auditAllForm]='auditAllForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+         <app-section title='Please Note:'>
+            <div class='col-md-12'>
+               <div class='text-lg me-4'>
+                  Random testing should be spread reasonably throughout the calendar year. Maintaining a satisfactory
+                  status will be contingent upon the completion of random tests on a quarterly basis (at a minimum).
+                  Keep a copy of your random draws for audit purposes. This documentation should include the method
+                  used
+                  to pull the random draws, the date of the random draw, and the names or ID#’s of all that were
+                  pulled
+                  on the random draw.
+                  Failing to manage the random program as required could result in the removal of your satisfactory
+                  status.
+                  <app-button-info
+                        info='A Consortium Pool is a group of companies combining their employees together into one random testing pool.'
+                        placement='bottom'></app-button-info>
+               </div>
+            </div>
+         </app-section>
+      </form>
+   </div>
+   <div *ngIf='ncms_id === "0"' style='height: calc(100vh - 244px);'>
+      <div>Set the NCMS ID</div>
+      <a class='card-link' routerLink='/general-settings' routerLinkActive='active-button'>General Settings</a>
+   </div>
+   <div *ngIf='(!randomProcess || isLoading) && !error && ncms_id !== "0"' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+           src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</app-module-base>
+

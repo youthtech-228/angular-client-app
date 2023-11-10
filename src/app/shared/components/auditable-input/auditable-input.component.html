@@ -1,0 +1,42 @@
+<div class='form-group'>
+   <div [formGroup]='auditForm'>
+      <!--  Hidden fields for all fields in the AuditMessage. Easy way to include all fields on save.    -->
+      <input type='hidden' name='id' formControlName='id'>
+      <input type='hidden' name='field_name' formControlName='field_name'>
+      <input type='hidden' name='field_id' formControlName='field_id'>
+      <input type='hidden' name='module' formControlName='module'>
+      <input type='hidden' name='ncms_id' formControlName='ncms_id'>
+      <input type='hidden' name='created_by' formControlName='created_by'>
+      <input type='hidden' name='created_date' formControlName='created_date'>
+      <input type='hidden' name='message_text' formControlName='message_text'>
+      <input type='hidden' name='notification_status' formControlName='notification_status'>
+      <input type='hidden' name='comments' formControlName='comments'>
+      <app-audit-label [label]='label' formControlName='status' [forName]='forName' (statusChange)='statusChangeAuditMessage($event)'>
+         <div *ngIf='!inputForm?.controls[field_name].valid && shouldValidate()'>
+            <div class='ms-auto' style='width: fit-content' >
+               <em style='color: var(--ncms-color-primary-red-bright)'>Required</em>
+            </div>
+         </div>
+         <ng-content></ng-content>
+      </app-audit-label>
+   </div>
+   <div [formGroup]='inputForm' >
+      <!-- For all inputs except phone numbers.-->
+      <input *ngIf='!isPhone && (!rows || rows === 1)' id='companyNameInput' [placeholder]='placeholder' class='form-control'
+             [formControlName]='field_name'
+             [ngClass]="{ 'needs-attention' : getAuditMessageStatus() === eAuditStatus.NEEDS_ATTENTION}"
+             (input)="change()" (focusin)='statusChangeAuditMessage(undefined)'
+      />
+      <!-- For phone inputs.-->
+      <input *ngIf='isPhone' id='phone' [placeholder]='placeholder' class='form-control' [formControlName]='field_name' appPhoneMask
+             [ngClass]="{ 'needs-attention' : getAuditMessageStatus() === eAuditStatus.NEEDS_ATTENTION}"
+             (input)="change()" (focusin)='statusChangeAuditMessage(undefined)'
+      />
+      <!-- For multi row inputs.-->
+      <textarea *ngIf='!isPhone && (rows > 1)' id='textArea+{{field_name}}' [rows]='rows' [cols]='cols || 48' [placeholder]='placeholder' class='form-control'
+             [formControlName]='field_name'
+             [ngClass]="{ 'needs-attention' : getAuditMessageStatus() === eAuditStatus.NEEDS_ATTENTION}"
+             (input)="change()" (focusin)='statusChangeAuditMessage(undefined)'
+      ></textarea>
+   </div>
+</div>

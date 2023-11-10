@@ -1,0 +1,70 @@
+<kendo-grid
+      [kendoGridBinding]="gridView"
+      kendoGridSelectBy="id"
+      [selectedKeys]="mySelection"
+      [pageSize]="20"
+      [pageable]="true"
+      [sortable]="true"
+      [groupable]="true"
+      [reorderable]="true"
+      [resizable]="true"
+      [height]="480"
+      [columnMenu]="{ filter: true }"
+      style="max-width: 1614px"
+>
+   <ng-template kendoGridToolbarTemplate>
+      <input placeholder="Search in all columns..." kendoTextBox (input)="onFilter($event.target.value)"/>
+      <button kendoGridExcelCommand type="button" icon="file-excel" style="float:right;">Export to Excel</button>
+      <button kendoGridPDFCommand icon="file-pdf" style="float:right;">Export to PDF</button>
+   </ng-template>
+<!--   <kendo-grid-checkbox-column-->
+<!--         [width]="45"-->
+<!--         [headerClass]="{'text-center': true}"-->
+<!--         [class]="{'text-center': true}"-->
+<!--         [resizable]="false"-->
+<!--         [columnMenu]="false"-->
+<!--         showSelectAll="true"-->
+<!--   ></kendo-grid-checkbox-column>-->
+      <kendo-grid-column field="approved" title="Approved" [width]="110" [locked]='true' [reorderable]='false'
+                         [resizable]='false'>
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <img src='assets/img/home/star-fill-color.svg' width="20" *ngIf="dataItem.approved"/>
+            <img src='assets/img/home/clock-fill.svg' width="20" *ngIf="!dataItem.approved"/>
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="" [width]="360" [groupable]='false' [reorderable]='false'>
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <kendo-upload
+                  [saveUrl]="uploadSaveUrl"
+                  [removeUrl]="uploadRemoveUrl">
+
+            </kendo-upload>
+<!--            <a class="card-link upload-link" [routerLink]='["/authentication/profile"]'>Upload</a>-->
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="first_name" title="First Name" [width]="120">
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="first-name">{{ dataItem.first_name }}</div>
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="last_name" title="Last Name" [width]="120">
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="last-name">{{ dataItem.last_name }}</div>
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="last_four" title="Last 4 of Emp ID" [width]="160">
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="last-name">{{ dataItem.last_four }}</div>
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="recent_drug_date" title="Most Recent Drug Test" [width]="200">
+         <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="recent-drug-date">{{ dataItem.recent_drug_date }}</div>
+         </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="pool" title="Pool" [width]="120"></kendo-grid-column>
+      <kendo-grid-column field="test_type" title="Test Type" [width]="120"></kendo-grid-column>
+      <kendo-grid-column field="ncms_comment" title="NCMS Comment" [width]="300"></kendo-grid-column>
+   <kendo-grid-pdf fileName="Employees.pdf" [repeatHeaders]="true"></kendo-grid-pdf>
+   <kendo-grid-excel fileName="Employees.xlsx"></kendo-grid-excel>
+</kendo-grid>

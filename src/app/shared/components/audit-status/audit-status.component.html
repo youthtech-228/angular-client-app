@@ -1,0 +1,21 @@
+<div name='audit-status-div' class='d-flex flex-row flex-nowrap align-items-center'  (mouseover)="isHover=true" (mouseout)="isHover=false">
+   <div class='status-img' [ngSwitch]='status' [hidden]='(labelHover || isHover) && isAuditor()'>
+      <img alt='Warning' class='ms-2 mb-1' src='assets/img/home/alert-triangle-fill%20(1).svg'
+           *ngSwitchCase='eAuditStatus.NEEDS_ATTENTION'/>
+      <img alt='Pending Review' class='mb-1`' src='assets/img/home/clock-fill.svg' width='17px' *ngSwitchCase='eAuditStatus.PENDING_REVIEW'
+           (click)='setStatus(eAuditStatus.PASSED)'/>
+      <img alt='Passed' class='mb-1' src='assets/img/home/star-fill%20(1).svg' *ngSwitchCase='eAuditStatus.PASSED'/>
+   </div>
+
+   <div name='audit-status-div' role='button' [hidden]='(!isHover && !labelHover) || !isAuditor()'>
+      <div class='border-set d-flex flex-row'>
+         <div class='btn-img' [ngClass]="{'select' : status === eAuditStatus.NEEDS_ATTENTION}" (click)='setStatus(eAuditStatus.NEEDS_ATTENTION)'>
+            <img style='margin: 2px; padding-bottom: 4px;'  src='assets/img/home/alert-triangle-fill%20(1).svg'/>
+         </div>
+         <div class='btn-img' [ngClass]="{'select' : status === eAuditStatus.PASSED}" (click)='setStatus(eAuditStatus.PASSED)'>
+            <img style='margin: 2px; padding-bottom: 4px;'  src='assets/img/home/star-fill%20(1).svg'/>
+         </div>
+         <a class='ms-2 btn-text' (click)='setStatus(undefined)'>Clear</a>
+      </div>
+   </div>
+</div>

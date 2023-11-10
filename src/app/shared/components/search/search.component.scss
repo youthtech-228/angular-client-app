@@ -1,0 +1,81 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+.search-comp {
+      width: 715px;
+      //height: 51px;
+      margin: 16.8px 0 16.8px 43.5px;
+      padding: 0 0 0 11px;
+      border-radius: 4px;
+      border: solid 1px #dddddd;
+      background-color: #ffffff;
+   }
+#search {
+   float: right;
+   margin-top: 9px;
+   width: 250px;
+}
+
+.search {
+   //padding: 5px 0;
+   width: 715px;
+   //height: 51px;
+   position: relative;
+   left: 10px;
+   float: left;
+   line-height: 22px;
+}
+
+.search input {
+   height: 51px;
+}
+//.search input {
+//   position: absolute;
+//   width: 0px;
+//   float: Left;
+//   margin-left: 210px;
+//   -webkit-transition: all 0.7s ease-in-out;
+//   -moz-transition: all 0.7s ease-in-out;
+//   -o-transition: all 0.7s ease-in-out;
+//   transition: all 0.7s ease-in-out;
+//   height: 30px;
+//   line-height: 18px;
+//   padding: 0 2px 0 2px;
+//   border-radius:1px;
+//}
+//
+//.search:hover input, .search input:focus {
+//   width: 200px;
+//   margin-left: 0px;
+//}
+
+//.btn {
+//   height: 30px;
+//   position: absolute;
+//   right: 0;
+//   top: 5px;
+//   border-radius:1px;
+//}
+
+.input-group {
+   .form-control {
+      border-left: unset;
+   }
+}
+.input-group-img {
+   display: flex;
+   align-items: center;
+   padding: $input-padding-y $input-padding-x;
+   margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
+   @include font-size($input-font-size); // Match inputs
+   font-weight: $font-weight-normal;
+   line-height: $input-line-height;
+   color: $input-group-addon-color;
+   text-align: center;
+   white-space: nowrap;
+
+   border: $input-border-width solid $input-group-addon-border-color;
+   @include border-radius($input-border-radius);
+   border-right: white 0 solid !important;
+}

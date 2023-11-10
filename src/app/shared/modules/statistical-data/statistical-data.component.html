@@ -1,0 +1,50 @@
+<ng-template #template>
+   Your data has been saved. Time for tea!
+</ng-template>
+<ng-template #errorTemplate>
+   {{errorMessage}}
+</ng-template>
+<ng-template #saveTemplate>
+   <span class='text-sm me-3'>Your data has changed.</span>
+   <button class='btn btn-outline-white btn-sm' type='button' [ngClass]="{ 'saving-bg' : isSaving }"
+           (click)='save()'>
+      <img *ngIf='isSaving' src='assets/img/home/ios-spinner.min.svg' width='16px' height='16px' alt='saving icon'/>
+      Save
+   </button>
+</ng-template>
+<ng-template #sendTemplate>
+   <span class='text-sm me-3'>Your data has not been sent to the contractor.</span>
+   <button class='btn btn-outline-white btn-sm' (click)='send()'>
+      Send
+   </button>
+</ng-template>
+<app-module-base [instructions]='instruction' pageTitle="Statistical Data" *ngIf='!isLoading'>
+   <app-section [title]='"Statistical Data"'>
+      <form [formGroup]='inputForm' (ngSubmit)='save()'>
+         <div class='d-flex flex-row'>
+            <div class='col-md-7'>
+               <app-auditable-generic label='Report Year' [module]='module' section='statisticalData'
+                                      field_name='a' forName='a'
+                                      [auditAllForm]='auditAllForm'>
+               </app-auditable-generic>
+               <select class='form-select select-style mb-3' aria-label='Report Year' formControlName='report_year'>
+                  <option *ngFor='let year of years' [ngValue]='year' >{{year}}</option>
+               </select>
+               <app-auditable-generic label='Report Period' [module]='module' section='statisticalData'
+                                      field_name='report_period' forName='report_period'
+                                      [auditAllForm]='auditAllForm'></app-auditable-generic>
+               <select class='form-select select-style' aria-label='Report Period' formControlName='report_period'>
+                  <option *ngFor='let period of reportPeriod' [ngValue]='period.value'>{{period.label}}</option>
+               </select>
+               <div class='mt-4'>
+                  <app-upload-files [fetchType]='module'></app-upload-files>
+               </div>
+            </div>
+            <div class='col-md-5'>
+               <app-message-panel [ncms_id]='authService.getNcmsId()' [module]='module' section='statisticalData'
+                                  [auditAllForm]='auditAllForm'></app-message-panel>
+            </div>
+         </div>
+      </form>
+   </app-section>
+</app-module-base>

@@ -1,0 +1,59 @@
+<app-titled-panel title='Action Center' icon='assets/img/home/inboxes-fill-white.svg' [allowSave]='allowSave'>
+   <div class='container-fluid ps-0 pe-0'>
+
+      <!-- Top header for search and filter -->
+      <div class='row g-0'>
+         <div class='col-7 p-3 border-right-ncms ps-6 pe-6'>
+            <app-search [searchPlaceholder]='"Find Company"'></app-search>
+         </div>
+
+         <div class='col-5 p-3 d-flex justify-content-center align-content-center' *ngIf='selectedCompany'>
+            <div class='btn-group btn-group-toggle' data-bs-toggle='buttons'>
+               <label class='btn btn-lg btn-outline-primary'>
+                  <input type='radio' name='options' id='option1'> All
+               </label>
+               <label class='btn btn-lg btn-outline-primary'>
+                  <input type='radio' name='options' id='option2' checked> Unread
+               </label>
+               <label class='btn btn-lg btn-outline-primary'>
+                  <input type='radio' name='options' id='option3'> Needs Attention
+               </label>
+            </div>
+         </div>
+      </div>
+      <hr style='margin: 0'/>
+      <div class='row g-0'>
+         <div class='col-4 border-right-ncms'>
+            <app-filter-bar></app-filter-bar>
+         </div>
+         <div class='col-3 border-right-ncms'>
+            <div *ngFor='let company of companyList'>
+               <app-company-card [company]='company' [selected]='selectedCompany?.id === company.id'
+                                 (select)='handleSelect($event)'></app-company-card>
+               <hr>
+            </div>
+         </div>
+         <div class='col-5'>
+            <div class='container p-0'>
+               <div *ngFor='let message of selectedCompany?.messages'>
+                  <div class='message-content'>
+                     <app-message [author]='message.author' [text]='message.text' [title]='message.title'
+                                  [pass]='message.pass' [allowReply]='true' [date]='message.date'></app-message>
+                  </div>
+                  <div class='message-content reply-content' *ngFor='let reply of message.replies'>
+                     <app-message [author]='reply.author' [text]='reply.text' [title]='reply.title'
+                                  [pass]='reply.pass' [allowReply]='false' [isReply]='true'
+                                  [date]='message.date'></app-message>
+                  </div>
+               </div>
+               <div class='text-muted' *ngIf='!selectedCompany'>
+                  <h4 class='text-center ms-auto me-auto mt-3' style='max-width: 70%' >Select a Company to review needs and comment.</h4>
+               </div>
+               <div class='text-muted' *ngIf='!selectedCompany?.messages'>
+                  <h4 class='text-center ms-auto me-auto mt-3' style='max-width: 70%' >The selected Company has no messages.</h4>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</app-titled-panel>

@@ -1,0 +1,29 @@
+$font-size-base: 1rem;
+$h1-font-size: $font-size-base * 2.25;
+$input-btn-font-size: $font-size-base * 1.25;
+
+$primary: #0173e6;
+$secondary: #777777;
+$teriary: #f26178;
+//$border-color: #707070;
+$border-color: #dddddd;
+
+$form-check-input-gutter:               1.50rem;
+
+$text-muted: #666666;
+
+$spacer: 8px;
+$spacers: ();
+$spacers: map-merge(
+            (
+                  0: 0,
+                  1: ($spacer * .5),
+                  2: $spacer,
+                  3: ($spacer * 2),
+                  4: ($spacer * 3),
+                  5: ($spacer * 4),
+                  6: ($spacer * 5),
+                  7: ($spacer * 6),
+            ),
+            $spacers
+);

@@ -1,0 +1,97 @@
+.internal-wrapper {
+   .internal-box-title {
+      display: flex;
+      border-bottom: solid 1px #dddddd;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+
+      .internal-title {
+         font-size: 1.5em;
+         color: var(--ncms-color-primary-red-dark);
+      }
+   }
+
+   .internal-box-content {
+      border-bottom: solid 1px #dddddd;
+      padding: 20px ;
+
+      .content-title {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         .title-box {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            .title {
+               font-size: 16px;
+               font-weight: bold;
+               color: #212529;
+            }
+
+            .setting-box {
+               position: absolute;
+               top: 32px;
+               right: -43px;
+               padding: 7px 10px 6px 8px;
+               border-radius: 4px;
+               background-color: #191919;
+
+               .edit {
+                  font-size: 14px;
+                  color: #ffffff;
+                  cursor: default;
+               }
+
+               .delete {
+                  font-size: 14px;
+                  color: var(--ncms-color-primary-red-bright);
+                  cursor: default;
+               }
+
+               &:before {
+                  content: "";
+                  width: 18px;
+                  height: 9px;
+                  background: #191919;
+                  position: absolute;
+                  left: 0;
+                  top: -62px;
+                  right: 0;
+                  bottom: 0;
+                  margin: auto;
+                  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+               }
+            }
+         }
+
+         .content-date-time {
+            font-size: 16px;
+            color: #888888;
+         }
+      }
+
+      .content-text {
+         margin-top: 18px;
+         font-size: 16px;
+         color: #212529;
+      }
+   }
+
+   .box-btn {
+      text-align: center;
+
+      .btn-add {
+         color: #ffffff;
+         font-size: 20px;
+         font-weight: bold;
+         padding: 16px 30px 19px 28px;
+         border-radius: 5px;
+         background-color: var(--ncms-color-primary-red-bright);
+         margin: 27px 0;
+      }
+   }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="check-circle" width="40.001" height="37.141" viewBox="0 0 40.001 37.141">
+    <defs>
+        <style>
+            .cls-1{fill:#ddd;fill-rule:evenodd}
+        </style>
+    </defs>
+    <path id="Path_473" d="M31.337.645a1.428 1.428 0 0 1 0 2.023l-20 20a1.428 1.428 0 0 1-2.023 0L.744 14.1a1.43 1.43 0 0 1 2.023-2.023l7.56 7.563L29.314.645a1.428 1.428 0 0 1 2.023 0z" class="cls-1" transform="translate(8.244 2.632)"/>
+    <path id="Path_474" d="M18.746 3.034a15.714 15.714 0 1 0 15.713 15.714 1.429 1.429 0 0 1 2.857 0 18.571 18.571 0 1 1-9.285-16.085A1.429 1.429 0 1 1 26.6 5.134a15.634 15.634 0 0 0-7.854-2.1z" class="cls-1" transform="translate(-.175 -.175)"/>
+</svg>

@@ -1,0 +1,61 @@
+<div class='col-12 ps-6 pe-6'>
+   <h6 class='subtitle mt-3 mb-3'>NUMBER OF ATTEMPTS</h6>
+   <div class='btn-group btn-group-toggle mb-3' data-bs-toggle='buttons'>
+      <label class='btn btn-lg btn-outline-primary ms-0'>
+         <input type='radio' name='options' id='option1a'> All
+      </label>
+      <label class='btn btn-lg btn-outline-primary  ms-0'>
+         <input type='radio' name='options' id='option2b' checked> 1st
+      </label>
+      <label class='btn btn-lg btn-outline-primary  ms-0'>
+         <input type='radio' name='options' id='option3c'> 2nd
+      </label>
+      <label class='btn btn-lg btn-outline-primary  ms-0'>
+         <input type='radio' name='options' id='option3d'> 3rd
+      </label>
+   </div>
+   <hr class='ms-n6 me-n6'/>
+   <h6 class='subtitle mt-3 mb-3'>DATE RANGE</h6>
+   <div class='row'>
+      <div class='col-6'>
+         <p class='label-small-lighter'>Start</p>
+         <kendo-dateinput style='width: 100%' [value]='value'></kendo-dateinput>
+      </div>
+      <div class='col-6 mb-3'>
+         <p class='label-small-lighter'>End</p>
+         <kendo-dateinput style='width: 100%' [value]='value'></kendo-dateinput>
+      </div>
+   </div>
+   <hr class='ms-n6 me-n6'/>
+   <h6 class='subtitle mt-3 mb-3'>RESPONSES</h6>
+   <div class='form-check mb-2'>
+      <input id='unreadId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='unreadId'>Unread</label>
+   </div>
+   <div class='form-check mb-2'>
+      <input id='todayId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='todayId'>Today</label>
+      <img class='ms-2' src='assets/img/home/alert-triangle-fill.svg' width="20"  alt='alert icon'/>
+   </div>
+   <div class='form-check mb-3'>
+      <input id='thisWeekId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='thisWeekId'>This Week</label>
+   </div>
+   <hr class='ms-n6 me-n6'/>
+   <h6 class='subtitle mt-3 mb-3'>MODULES</h6>
+   <div class='form-check mb-2'>
+      <input id='companyInformationId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='companyInformationId'>Company Information</label>
+      <img class='ms-2' src='assets/img/home/alert-triangle-fill.svg' width="20"  alt='alert icon'/>
+   </div>
+   <div class='form-check mb-2'>
+      <input id='employeeListId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='employeeListId'>Employee List</label>
+      <img class='ms-2' src='assets/img/home/clock-fill.svg' width="20" alt='pending icon'/>
+   </div>
+   <div class='form-check mb-4'>
+      <input id='returnToDutyId' class='form-check-input' type='checkbox'/>
+      <label class='form-check-label form-label' for='returnToDutyId'>Return to Duty</label>
+   </div>
+   <button class='ms-n1 btn btn-outline-secondary mb-3'>Reset Filters</button>
+</div>

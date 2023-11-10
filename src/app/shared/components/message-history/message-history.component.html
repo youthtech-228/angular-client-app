@@ -1,0 +1,34 @@
+<form class='comment-content'>
+   <div class='d-flex flex-column message-content'>
+      <div class='d-flex flex-row'>
+         <div class='w-100'>
+            <div class='content-title inactive'>
+               <div class='title'>{{message.field_name}}</div>
+            </div>
+            <div class='content-text justify-content-between'>
+               <div class='label-normal w-100'>
+                  <div class='label-normal w-100 d-flex flex-row align-items-center inactive'>
+                     <div class='me-2'>
+                        {{message.message_text}}
+                     </div>
+                  </div>
+                  <div class='content-comment'>
+                     <img src='assets/img/home/logo_token.svg' alt='person icon' *ngIf='isUserNcms()'/>
+                     <img src='assets/img/home/person-fill-small-gray.svg' alt='person icon' *ngIf='!isUserNcms()'/>
+                     <span class='label-small inactive' style='font-weight: bold'
+                           [ngClass]='{"ncms-user": isUserNcms()}'>
+                        {{message.created_by}}
+                     </span>
+                     <span *ngIf='message.created_date' class='label-small text-muted ms-1 inactive'>
+                        {{message.created_date | dateDotNet | date : 'M/d/yyyy, h:mm a'}}
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class='d-flex flex-column flex-grow-1 flex-shrink-1 justify-content-between align-items-center'>
+            <img class='icon' src='assets/img/home/star-fill-color.svg' alt='star icon'/>
+         </div>
+      </div>
+   </div>
+</form>

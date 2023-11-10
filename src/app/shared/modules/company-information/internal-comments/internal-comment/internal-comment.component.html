@@ -1,0 +1,55 @@
+<div>
+   <app-modal elementId='confirmDelete{{comment.id}}' title='Delete Comment?' submitLabel='Delete Comment'
+              (submit)='handleDelete()'>
+      Do you want to permanently delete the comment:
+      <div class='m-4'><em>{{comment.body}}</em></div>
+   </app-modal>
+   <form autocomplete='off' [formGroup]='commentForm'>
+      <div *ngIf='!commentForm.value.archivedDate' >
+         <div class='d-flex justify-content-between align-items-center'>
+            <div class='d-flex align-items-center position-relative' (click)='handleArchive()'>
+               <div class='title me-5 pointable'
+                    *ngIf='comment.first_name || comment.last_name'>{{ comment.first_name }}&nbsp;{{comment.last_name}} </div>
+               <div class='title me-5' *ngIf='!comment.first_name && !comment.last_name'>{{ comment.username }}</div>
+               <span *ngIf='comment.date_time' class='label-small text-muted ms-1'>
+               {{comment.date_time | dateDotNet | date : 'M/d/yyyy, h:mm a'}}
+            </span>
+            </div>
+            <div class='dropleft'>
+               <div class='btn btn-icon-normal' data-bs-toggle='dropdown'>
+                  <img height='22px' src='assets/img/home/three-dots-vertical.svg' alt='vertical dots'/>
+               </div>
+               <div class='dropdown-menu' aria-labelledby='dropdownMenu2'>
+                  <button class='dropdown-item' type='button' (click)='handleEdit()'>
+                     Edit
+                  </button>
+                  <button class='dropdown-item' type='button' data-bs-toggle='modal'
+                          [attr.data-bs-target]='"#confirmDelete"+comment.id'>
+                     Delete
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div [hidden]='!isEditing '>
+            <textarea #commentInput id='new comment' name='Comment' rows='3' class='w-100'
+                      (blur)='handleEndEditing()'
+                      formControlName='body'>
+            </textarea>
+         </div>
+         <div [hidden]='isEditing ' class='label-normal'>
+            {{ commentForm.value.body }}
+         </div>
+      </div>
+      <div  *ngIf='commentForm.value.archivedDate' class='d-flex justify-content-between'>
+         <div>
+            <span class='label-small text-muted'>
+               Archived
+            </span>
+            <span class='label-small text-muted ms-1 me-2'>
+                  {{comment.archivedDate | dateDotNet | date : 'M/d/yyyy, h:mm a'}}
+            </span>
+         </div>
+         <a (click)='handleUnarchive()' class='me-1'>Unarchive</a>
+      </div>
+   </form>
+</div>

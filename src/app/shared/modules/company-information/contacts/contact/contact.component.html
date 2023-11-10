@@ -1,0 +1,4 @@
+<div>
+   <app-contact-display [hidden]='isEdit' [contactsFormArray]='contactsFormArray' [ncms_id]='ncms_id' [module]='module' [section]='section' [contact]='contact' [auditAllForm]='auditAllForm' (edit)='handleEditContact()' (delete)='handleDeleteContact()'></app-contact-display>
+   <app-contact-edit #editContact [contactsFormArray]='contactsFormArray' [hidden]="!isEdit" [contact]='contact' [auditAllForm]='auditAllForm' [ncms_id]='ncms_id' [module]='module' (close)='handleCloseEdit()'></app-contact-edit>
+</div>

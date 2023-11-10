@@ -1,0 +1,53 @@
+<form autocomplete='off' [formGroup]='contactForm' (ngSubmit)='saveContact(contactForm.value)'>
+   <div class='col box-contact-left'>
+      <h6 class='card-title title-small-primary'>
+         {{title}}
+      </h6>
+      <div class='row'>
+         <div class='col-md-7 pb-3'>
+            <app-auditable-input
+               [inputForm]='contactForm' 
+               [auditAllForm]='$any(parentForm?.get("auditForm"))' 
+               [ncms_id]='ncms_id'
+               [module]='module'
+               [section]='section'
+               [field_name]='"name" + elementRef'
+               label='ContactName'>
+            </app-auditable-input>
+            <app-auditable-input 
+               [inputForm]='contactForm' 
+               [auditAllForm]='$any(parentForm?.get("auditForm"))' 
+               [ncms_id]='ncms_id'
+               [module]='module'
+               [section]='section'
+               [field_name]='"address" + elementRef'
+               label='Contact Address'>
+            </app-auditable-input>
+            <app-auditable-input 
+               [inputForm]='contactForm' 
+               [auditAllForm]='$any(parentForm?.get("auditForm"))' 
+               [ncms_id]='ncms_id'
+               [module]='module'
+               [section]='section'
+               [field_name]='"phone" + elementRef'
+               label='Contact Phone'>
+            </app-auditable-input>
+         </div>
+         <div class='col-md-5' style='margin-top: auto'>
+            <!--         <div class='content-top-box'>-->
+            <!--            <div class='title' *ngIf='contact.primary'>PRIMARY <img/></div>-->
+
+            <!--            <div class='content' *ngIf='contact.primary'>-->
+            <!--               <img src='../assets/img/home/award.svg'/>-->
+            <!--            </div>-->
+            <!--            <div class='content' *ngIf='!contact.primary'>-->
+            <!--               <img src='../assets/img/home/award-nocolor.svg'/>-->
+            <!--            </div>-->
+            <!--         </div>-->
+            <div>
+               <img src='assets/img/home/person-fill.svg'/>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>

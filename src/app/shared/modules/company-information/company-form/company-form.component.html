@@ -1,0 +1,45 @@
+<form [formGroup]='companyForm'>
+   <app-auditable-input id='companyName' [inputForm]='companyForm'
+                        [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id' [module]='module'
+                        section='company' field_name='name' label='Company Name'>
+      <span class='form-group-note'>*For Display Only</span>
+   </app-auditable-input>
+   <app-auditable-input 
+      id='mailing_address'
+      [inputForm]='companyForm' 
+      [auditAllForm]='auditAllForm' 
+      [ncms_id]='company?.ncms_id'
+      [module]='module' 
+      section='company' 
+      field_name='mailing_address'
+      label='Mailing Address'>
+
+   </app-auditable-input>
+
+      <app-auditable-input id='mailing_city'
+                             [inputForm]='companyForm' [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id'
+                             [module]='module' section='company' field_name='mailing_city'
+                             label='City'>
+      </app-auditable-input>
+   <div class='row'>
+      <div class='col-md-6'>
+         <app-auditable-input id='mailing_state'
+                                [inputForm]='companyForm' [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id'
+                                [module]='module' section='company' field_name='mailing_state'
+                                label='State'>
+         </app-auditable-input>
+      </div>
+      <div class='col-md-6'>
+         <app-auditable-input id='mailing_zip'
+                                [inputForm]='companyForm' [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id'
+                                [module]='module' section='company' field_name='mailing_zip'
+                                label='Zip Code'>
+         </app-auditable-input>
+      </div>
+   </div>
+   <app-auditable-input id='phone'
+                          [inputForm]='companyForm' [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id'
+                          [module]='module' section='company' field_name='phone'
+                          label='Phone' isPhone='true'>
+   </app-auditable-input>
+</form>

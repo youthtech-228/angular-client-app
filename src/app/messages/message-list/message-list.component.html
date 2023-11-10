@@ -1,0 +1,33 @@
+<div class="internal-wrapper">
+   <div class="internal-box-title">
+      <div class="internal-icon-box">
+         <img src="assets/img/home/chat-fill.svg" />
+      </div>
+      <div class="internal-title">Internal Comments</div>
+   </div>
+   <div *ngFor="let content of contents" class="internal-box-content">
+      <div class="content-title">
+         <div class="title-box">
+            <div class="title">{{ content.name }}</div>
+            <div (click)="showSetting(content)" class="title-dot">...</div>
+            <div *ngIf="content.checkSetting">
+               <div
+                     style="position: fixed; top: 0; left: 0; right: 0; bottom: 0"
+                     (click)="closeSetting(content)"
+               ></div>
+               <div class="setting-box">
+                  <div class="edit">Edit</div>
+                  <div class="delete">Delete</div>
+               </div>
+            </div>
+         </div>
+         <div class="content-date-time">{{ content.dateTime }}</div>
+      </div>
+      <div class="content-text">
+         {{ content.text }}
+      </div>
+   </div>
+   <div class="box-btn">
+      <button class="btn btn-add">Add Comment/File</button>
+   </div>
+</div>

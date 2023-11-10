@@ -1,0 +1,74 @@
+.content {
+  &:hover > img {
+    opacity: 0.75;
+  }
+}
+
+.person-fill {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.person-background {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  img {
+    margin: 0 auto;
+    display: block;
+    transform: translateY(20px);
+  }
+}
+
+.title {
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: -0.57px;
+  text-align: left;
+  color: #212529;
+}
+
+::ng-deep .contact-label {
+  label {
+    cursor: pointer;
+    font-size: 30px !important;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: -0.57px;
+    text-align: left;
+    color: #212529;
+    margin-left: 0;
+  }
+}
+
+.reward-title {
+  width: 59px;
+  height: 16px;
+  margin: 1.1px 0 1.1px 4.4px;
+  font-size: 13px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: -0.25px;
+  text-align: left;
+  color: #888888;
+  display: inline-block;
+}
+
+.frame-style {
+  margin: 0 0 30px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.2);
+  border-left: 12px solid #dddddd;
+  background-color: #ffffff;
+}

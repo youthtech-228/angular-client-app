@@ -1,0 +1,83 @@
+<div>
+   <div *ngIf='!isPageLoading' class="main row">
+      <div class="col-md-12" style="padding: 0;">
+         <kendo-grid
+               [kendoGridBinding]="gridData"
+               kendoGridSelectBy="idx"
+               [pageSize]="20"
+               [pageable]="true"
+               [sortable]="true"
+               [groupable]="false"
+               [reorderable]="true"
+               [resizable]="true"
+               [height]="500"
+               [columnMenu]="{ filter: true }"
+            >
+               <ng-template kendoGridToolbarTemplate>
+               <input
+                  placeholder="Search in all columns..."
+                  kendoTextBox
+                  (input)="onFilter($event.target.value)"
+               />
+               </ng-template>
+               <kendo-grid-column field="RoleName" title="name">
+               </kendo-grid-column><kendo-grid-column
+                  field="idx"
+                  title=""
+                  [width]="200"
+                  [resizable]="false"
+                  filter="boolean"
+               >
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                     <button  kendoButton look="flat" [primary]="true" (click)="onRoleEdit(dataItem)">
+                        Manage
+                     </button>
+                  </ng-template>
+               </kendo-grid-column>
+      </kendo-grid>
+      </div>
+      <div *ngIf='isPermissionPane' class="col-md-12 sidebar-main" style="padding: 0;">
+         <div class="col-md-12 user-row sidebar-item">
+            <div>
+               <p class="user-label">ROLE</p>
+               <p class="user-name">Admin</p>
+            </div>
+            <img class="icon-trash btn-img" src="assets/img/home/trash-fill-red.svg" alt="">
+         </div>
+         <hr>
+         <p class="roles-label sidebar-item">
+            AVAILABLE ROLES
+         </p>
+         <div class="col-md-12 sidebar-item role-filter-row">
+            <kendo-textbox
+               placeholder="Search all roles"
+               [(ngModel)]="permissionFilter"
+               (change)="onFilterPermission()"
+               (keyup)="onFilterPermission()"
+               (keydown)="onFilterPermission()">
+            </kendo-textbox>
+         </div>
+         <div *ngFor="let permission of filteredPermissions">
+            <div class="col-md-12 role-row sidebar-item">
+               <div class="role-details">
+                  <div class="role-name">{{ permission.Name }}</div>
+                  <div class="role-detail"></div>
+               </div>
+               <kendo-switch
+                  [(ngModel)]="permission.checked"
+                  (valueChange)="onPermissionToggle($event, permission)"></kendo-switch>
+            </div>
+            <hr>
+         </div>
+      </div>
+   </div>
+   <div *ngIf='isPageLoading' style='height: calc(100vh - 244px);'>
+      <img 
+         style='text-align: center;
+               top: 300px;
+               position: absolute;
+               left: calc(50% - 50px);
+               height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

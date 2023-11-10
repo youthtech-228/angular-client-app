@@ -1,0 +1,27 @@
+<kendo-grid
+      [kendoGridBinding]="gridView"
+      kendoGridSelectBy="id"
+      [selectedKeys]="mySelection"
+      [pageSize]="20"
+      [pageable]="false"
+      [sortable]="true"
+      [groupable]="false"
+      [reorderable]="false"
+      [resizable]="true"
+      [height]="240"
+      [columnMenu]="{ filter: true }"
+      style="max-width: 1614px"
+>
+   <kendo-grid-column field="title" title="Title" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="title">{{ dataItem.title }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="employee_supervisor" title="Employee/Supervisor" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="employee_supervisor">{{ dataItem.employee_supervisor }}</div>
+      </ng-template>
+   </kendo-grid-column>
+<!--   <kendo-grid-pdf fileName="Employees.pdf" [repeatHeaders]="true"></kendo-grid-pdf>-->
+<!--   <kendo-grid-excel fileName="Employees.xlsx"></kendo-grid-excel>-->
+</kendo-grid>

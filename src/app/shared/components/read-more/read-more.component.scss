@@ -1,0 +1,41 @@
+.container {
+  padding: 0;
+}
+#collapsePanel.collapse:not(.show) {
+  display: block;
+  height: 4rem;
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(transparent 50%, white);
+  }
+}
+
+#collapsePanel.collapsing {
+  height: 4rem;
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(transparent 50%, white);
+  }
+}
+
+a.collapsed::after {
+  content: '+ Show More';
+}
+
+a:not(.collapsed)::after {
+  content: '- Show Less';
+}

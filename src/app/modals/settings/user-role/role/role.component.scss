@@ -1,0 +1,97 @@
+.main{
+    height: calc(100vh - 244px);
+}
+.sidebar-main{
+    width: 100%;
+}
+.sidebar-item
+{
+    padding: 0px 35px;
+}
+.user-row{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+}
+.user-label{
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777777;
+}
+.user-name{
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+}
+
+.roles-label{
+    margin-top: 28.9px;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777777;
+}
+.role-filter-row{
+    width: 100%;
+    margin-bottom: 25px;
+}
+.role-row{
+    display: flex;
+    height: 55px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.role-details {
+    flex: 1;
+}
+.role-name {
+    color: #656565;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+    margin-bottom: 10px;
+}
+.role-detail {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.13;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+}
+.icon-trash {
+    width: 19.5px;
+    height: 22.6px;
+    object-fit: contain;
+    margin-top: 20px;
+}
+.btn-img{
+    cursor: pointer;
+}
+.btn-img:hover{
+    opacity: 0.6;
+}
+.btn-img:active {
+    transform: translateY(2px);
+}

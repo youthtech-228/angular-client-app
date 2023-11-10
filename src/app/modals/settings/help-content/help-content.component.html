@@ -1,0 +1,151 @@
+<div *ngIf='templates && !isLoading' style='min-height: calc(100vh - 244px);'>
+   <ng-template #template>
+      Help Content has been modified!
+   </ng-template>
+   <div class="main">
+      <div class="row">
+         <div class="col-md-3 module-list">
+            <h3>Modules</h3>
+            <div class="form-check" [class.border-top]="borderTop" *ngFor="let module of modules">
+               <input 
+                  class="form-check-input" 
+                  type="radio" 
+                  name="moduleRadio" 
+                  id="{{ 'moduleRadio' + module.id }}"
+                  (change)="onModuleSelect()"
+                  value="{{ module.module }}"
+                  [(ngModel)]="selectedModule">
+               <label class="form-check-label" for="{{ 'moduleRadio' + module.id }}">
+                  {{ module.title }}
+               </label>
+            </div>
+         </div>
+         <div class="col-md-9">
+            <kendo-editor [value]="helpContent" (valueChange)="valueChange($event)" style="height: calc(100% - 60px);">
+               <kendo-toolbar>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button kendoEditorUndoButton></kendo-toolbar-button>
+                  <kendo-toolbar-button kendoEditorRedoButton></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
+                  <kendo-toolbar-button kendoEditorItalicButton></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorUnderlineButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorStrikethroughButton
+                  ></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorSubscriptButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorSuperscriptButton
+                  ></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorAlignLeftButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAlignCenterButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAlignRightButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAlignJustifyButton
+                  ></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-dropdownlist
+                  kendoEditorFormat
+                  ></kendo-toolbar-dropdownlist>
+                  <kendo-toolbar-dropdownlist
+                  kendoEditorFontSize
+                  ></kendo-toolbar-dropdownlist>
+                  <kendo-toolbar-dropdownlist
+                  kendoEditorFontFamily
+                  ></kendo-toolbar-dropdownlist>
+                  <kendo-toolbar-colorpicker
+                  kendoEditorForeColor
+                  ></kendo-toolbar-colorpicker>
+                  <kendo-toolbar-colorpicker
+                  kendoEditorBackColor
+                  view="gradient"
+                  ></kendo-toolbar-colorpicker>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorInsertUnorderedListButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorInsertOrderedListButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button kendoEditorIndentButton></kendo-toolbar-button>
+                  <kendo-toolbar-button kendoEditorOutdentButton></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorCreateLinkButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button kendoEditorUnlinkButton></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-editor-insert-table-button></kendo-editor-insert-table-button>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorAddColumnBeforeButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAddColumnAfterButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAddRowBeforeButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorAddRowAfterButton
+                  ></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                     kendoEditorDeleteColumnButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorDeleteRowButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                     kendoEditorDeleteTableButton
+                  ></kendo-toolbar-button>
+                  </kendo-toolbar-buttongroup>
+                  <kendo-toolbar-button
+                  kendoEditorInsertFileButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                  kendoEditorInsertImageButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                  kendoEditorViewSourceButton
+                  ></kendo-toolbar-button>
+                  <kendo-toolbar-button
+                  kendoEditorCleanFormattingButton
+                  ></kendo-toolbar-button>
+               </kendo-toolbar>
+            </kendo-editor>
+            <div class="button-wrapper">
+               <button class="btn btn-info btn-save" (click)="onStore(1)" [ngClass]="{ 'saving-bg' : isSaving }">
+                  <img *ngIf='isSaving' src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+                  Save
+               </button>
+               <button class="btn btn-success btn-publish" (click)="onStore(2)" [ngClass]="{ 'saving-bg' : isPublishing }">
+                  <img *ngIf='isPublishing' src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+                  Publish
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div *ngIf='isLoadingContent' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+           src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

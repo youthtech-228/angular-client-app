@@ -1,0 +1,138 @@
+.main{
+    height: calc(100vh - 244px);
+}
+.k-grid{
+    height: calc(100vh - 244px);
+}
+.sidebar-main{
+    width: 400px;
+}
+.sidebar-item
+{
+    padding: 0px 35px;
+}
+.user-row{
+    margin-top: 28px;
+}
+.icon-trash {
+    width: 19.5px;
+    height: 22.6px;
+    object-fit: contain;
+    margin-top: 20px;
+}
+.btn-img{
+    cursor: pointer;
+}
+.btn-img:hover{
+    opacity: 0.6;
+}
+.btn-img:active {
+    transform: translateY(2px);
+}
+.user-label{
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777777;
+}
+.user-name{
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+}
+.sidebar{
+    width: 600px;
+}
+.user-row{
+    display: flex;
+    justify-content: space-between;
+}
+.role-label{
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777777;
+}
+.k-chip-list{
+    display: block !important;
+}
+.chip-style
+{
+    border: solid 1px #000000;
+    background-color: #ffffff;
+    color: #312424;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    font-size: 24px;
+    padding: 25px 10px;
+    border-radius: 32px;
+    margin-top: 10px;
+}
+.roles-label{
+    margin-top: 28.9px;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777777;
+}
+.role-filter-row{
+    width: 100%;
+    margin-bottom: 25px;
+}
+.role-row{
+    display: flex;
+    height: 55px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.role-details {
+    flex: 1;
+}
+.role-name {
+    color: #656565;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+.role-detail {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.13;
+    letter-spacing: normal;
+    text-align: left;
+    color: #312424;
+}
+.k-switch-on > .k-switch-container{
+    border-color: #55dd75 !important;
+    background-color: #55dd75 !important;
+}

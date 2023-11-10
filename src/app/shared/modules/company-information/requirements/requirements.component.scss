@@ -1,0 +1,28 @@
+.requirements-wrapper {
+   .requirements-check {
+      margin-top: 29px;
+
+      .box {
+         display: flex;
+         align-items: center;
+         margin-bottom: 8px;
+
+         &:last-child {
+            margin-bottom: 0;
+         }
+
+         input {
+            width: 18px;
+            height: 17px;
+            margin-right: 8px;
+            //padding-right: 8px;
+         }
+
+      }
+   }
+   label {
+      margin-bottom: 0;
+      font-size: 20px;
+      color: #212529;
+   }
+}

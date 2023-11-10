@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29.497" height="29.497" viewBox="0 0 29.497 29.497">
+    <defs>
+        <style>
+            .cls-1{fill-rule:evenodd}
+        </style>
+    </defs>
+    <g id="x" transform="rotate(-45 17.804 7.374)">
+        <path id="Path_745" d="M.615.615a1.159 1.159 0 0 0 0 1.641l18.537 18.537a1.16 1.16 0 0 0 1.641-1.641L2.256.615a1.158 1.158 0 0 0-1.641 0z" class="cls-1" transform="translate(-.275 -.275)"/>
+        <path id="Path_746" d="M20.792.615a1.159 1.159 0 0 1 0 1.641L2.255 20.793a1.16 1.16 0 1 1-1.64-1.641L19.152.615a1.158 1.158 0 0 1 1.641 0z" class="cls-1" transform="translate(-.274 -.275)"/>
+    </g>
+</svg>

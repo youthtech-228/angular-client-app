@@ -1,0 +1,74 @@
+<div>
+   <form [formGroup]="pageForm" (ngSubmit)='onSave()'>
+      <app-module-base 
+         #baseComponent 
+         [alertMessage]="alertMessage" 
+         [module]='module'
+         *ngIf='!isLoading' 
+         [pageTitle]="'Subcontractors'"
+         [isSaving]='isSaving'>
+         <app-section [title]='"Subcontractors"'>
+            <div class='row'>
+               <div class="col-md-6">
+                  <div class="col-md-12">
+                     <div *ngIf="!isComplete" 
+                        class="col-md-12"
+                     >
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                           <img src="assets/img/home/alert-triangle-fill.svg" alt="" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2">
+                           <div>
+                              The Subcontractors section is not complete.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <span>
+                        Does or will your company use subcontractors to perform DOT/PHMSA covered work for any of our clients?
+                     </span>
+                  </div>
+                  <div class='col-md-12'>
+                     <div class="form-check form-check-inline">
+                        <input class="form-check-input" 
+                           type="radio"
+                           id="isDotSafeYes"
+                           value="1"
+                           formControlName="isDot"
+                        >
+                        <label class="form-check-label" for="isDotSafeYes">
+                        Yes
+                        </label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <input
+                           class="form-check-input"
+                           type="radio"
+                           id="isDotSafeNo"
+                           value="0"
+                           formControlName="isDot" >
+                        <label class="form-check-label" for="isDotSafeNo">
+                           No
+                        </label>
+                     </div>
+                  </div>
+               </div>
+               <div class='col-md-6'>
+                  <app-message-panel
+                     [ncms_id]='ncms_id'
+                     [module]='module'
+                     section='general'
+                     [auditAllForm]='messageForm'></app-message-panel>
+               </div>
+            </div>
+         </app-section>
+      </app-module-base>
+   </form>
+   <div *ngIf='ncms_id === "0"' style='height: calc(100vh - 244px);'>
+      <div>Set the NCMS ID</div>
+      <a class='card-link' routerLink='/general-settings' routerLinkActive='active-button'>General Settings</a>
+   </div>
+   <div *ngIf='isLoading' style='height: calc(100vh - 244px);'>
+      <img style='text-align: center;top: 300px;position: absolute;left: calc(50% - 50px);height: 100px;'
+         src='assets/img/home/ios-spinner.min.svg' alt='saving icon'/>
+   </div>
+</div>

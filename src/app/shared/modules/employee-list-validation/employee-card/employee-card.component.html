@@ -1,0 +1,32 @@
+<div class='card container p-4'>
+   <div class='color-secondary text-sm row align-items-center ps-3'>
+      <div class='dot color-secondary-bg'></div>
+      PENDING VALIDATION
+   </div>
+   <div class='employee-section form-group'>
+      <label for="first-name">First Name</label>
+      <input 
+      type="text"
+      name="first-name"
+      class="form-control form-control-lg" 
+      placeholder="Employee First Name"
+      [(ngModel)]="employee.first_name" 
+      required
+      >
+   </div>
+   <div class='employee-section form-group'>
+      <label for="first-name">Last Name</label>
+      <input 
+      type="text"
+      name="first-name"
+      class="form-control form-control-lg" 
+      placeholder="Employee Last Name"
+      [(ngModel)]="employee.last_name" 
+      required
+      >
+   </div>
+   <div class='container-fluid mt-4'>
+      <button class='btn btn-lg btn-success col-12' (click)="validate()">Approve Validation</button>
+   </div>
+
+</div>

@@ -1,0 +1,33 @@
+<form [formGroup]='thirdPartyForm'>
+   <app-section title='Third-party Administrator' [status]='status'>
+      <div class='third-wrapper'>
+         <div class='row g-0'>
+            <div class='col-md-7'>
+               <div class='third-check'>
+                  <div class='box'>
+                     <div class='form-check ps-0'>
+                        <app-auditable-checkbox label='Pipeline & Hazardous Materials Safety Admin. (PHMSA)' forName='phmsa'
+                                                [ncms_id]='company.ncms_id'
+                                                [auditAllForm]='auditAllForm'
+                                                field_id='company-information.thirdParty.uses_tpa'
+                                                [inputForm]='thirdPartyForm'></app-auditable-checkbox>
+                     </div>
+                  </div>
+               </div>
+               <div class='third-input mt-3 ms-4 me-5'>
+                  <app-auditable-input id='tpa_name'
+                                       [inputForm]='thirdPartyForm' [auditAllForm]='auditAllForm' [ncms_id]='company?.ncms_id'
+                                       [module]='module' section='thirdParty' field_name='tpa_name'
+                                       label='TPA Name'>
+                     <span class='text-xs text-muted'>*If Applicable</span>
+                  </app-auditable-input>
+               </div>
+            </div>
+            <div class='col-md-5'>
+               <app-message-panel [ncms_id]='company.ncms_id' [module]='module' [section]='section'
+                                  [auditAllForm]='auditAllForm'></app-message-panel>
+            </div>
+         </div>
+      </div>
+   </app-section>
+</form>

@@ -1,0 +1,52 @@
+<kendo-grid
+      [kendoGridBinding]="gridView"
+      kendoGridSelectBy="id"
+      [selectedKeys]="mySelection"
+      [pageSize]="20"
+      [pageable]="true"
+      [sortable]="true"
+      [groupable]="true"
+      [reorderable]="true"
+      [resizable]="true"
+      [height]="480"
+      [columnMenu]="{ filter: true }"
+      style="max-width: 1614px"
+>
+   <ng-template kendoGridToolbarTemplate>
+      <input placeholder="Search in all columns..." kendoTextBox (input)="onFilter($event.target.value)"/>
+      <button kendoGridExcelCommand type="button" icon="file-excel" style="float:right;">Export to Excel</button>
+      <button kendoGridPDFCommand icon="file-pdf" style="float:right;">Export to PDF</button>
+   </ng-template>
+   <kendo-grid-column field="approved" title="" [width]="80" [locked]='true' [reorderable]='false'
+                      [resizable]='false'>
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <img class='me-3' src='assets/img/home/pencil-fill.svg' width="20"/>
+         <img src='assets/img/home/trash-fill.svg' width="20"/>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="first_name" title="First Name" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="first-name">{{ dataItem.first_name }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="last_name" title="Last Name" [width]="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="last-name">{{ dataItem.last_name }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="last_four" title="Last 4 of Emp ID" [width]="160">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="last-name">{{ dataItem.last_four }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="drug_training_date" title="Drug/Alcohol Training Date" [width]="200">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="drug-training-date">{{ dataItem.drug_training_date }}</div>
+      </ng-template>
+   </kendo-grid-column>
+   <kendo-grid-column field="alcohol_training_date" title="Alcohol Training Date" [width]="200">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         <div class="drug-training-date">{{ dataItem.alcohol_training_date }}</div>
+      </ng-template>
+   </kendo-grid-column>
+</kendo-grid>

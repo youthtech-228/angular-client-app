@@ -1,0 +1,133 @@
+.root {
+   border: solid 1px #dddddd;
+}
+.sidebar-item {
+   padding-left: 28px;
+}
+.title {
+   width: 256px;
+   height: 85px;
+   font-size: 36px;
+   font-weight: normal;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.19;
+   letter-spacing: normal;
+   text-align: left;
+   color: #312424;
+}
+.line {
+   border-left: solid 1px #dddddd;
+}
+.icon-document {
+   width: 33px;
+   height: 34px;
+}
+.form-label {
+   font-size: 20px;
+}
+.sidebar-subcontent {
+   width: 306px;
+   height: 53px;
+   margin: 15px 0 0;
+   font-size: 20px;
+   font-weight: normal;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.5;
+   letter-spacing: -0.38px;
+   text-align: left;
+   color: #312424;
+}
+.emp-list-wrapper{
+   max-height: 200px;
+   overflow-y: scroll;
+}
+.emp-row {
+   display: flex;
+   justify-content: flex-start;
+   margin-top: 14px;
+   align-items: center;
+   .icon-man {
+      width: 48px;
+      height: 49px;
+   }
+   .name {
+      width: 300px;
+      height: 24px;
+      margin-left: 14px;
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.2;
+      letter-spacing: normal;
+      text-align: left;
+      color: #707070;
+      margin-bottom: 0px;
+   }
+   .icon-trash {
+      width: 19.5px;
+      height: 22.6px;
+      object-fit: contain;
+   }
+}
+.btn-add{
+   margin-left: 28px;
+}
+.btn-submit {
+   background-color: #55dd75;
+   color: white;
+}
+.options-wrapper {
+   padding: 26.8px 22.5px 0px 13px;
+   border-radius: 5px;
+   border: solid 1px #dddddd;
+   background-color: #ffffff;
+}
+.option {
+   display: flex;
+   align-items: center;
+   margin-bottom: 30px;
+   .mark {
+      position: relative;
+      width: 30px; 
+      height: 30px;
+      text-align: center;
+      color: white;
+      background: #55dd75;
+      border-radius: 50%;
+      margin-right: 20px;
+      .icon-tick {
+         width: 15px;
+         position: absolute;
+         top: 8px;
+         left: 7px;
+         width: 16px;
+      }
+   }
+   .name {
+      width: calc(100% - 30px);
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.2;
+      letter-spacing: normal;
+      text-align: left;
+      color: #888888;
+   }
+}
+.btn-img{
+   cursor: pointer;
+}
+.btn-img:hover{
+   opacity: 0.6;
+}
+.btn-img:active {
+   transform: translateY(2px);
+}
+.validation-error {
+   color: red;
+   font-size: 14px;
+}
